@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FixU</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="quote_image">quote image</string>
+    <string name="history">History</string>
+    <string name="view_more">View More</string>
+    <string name="diagnose_result">Diagnose Result</string>
+    <string name="date">11/11/2024</string>
 </resources>
