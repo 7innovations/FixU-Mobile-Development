@@ -7,4 +7,12 @@
     <string name="view_more">View More</string>
     <string name="diagnose_result">Diagnose Result</string>
     <string name="date">11/11/2024</string>
+    <string name="note_title">Title of Notes</string>
+    <string name="note_content">When you try your best, but you dont succeed When you get what you want, but not what you need When you feel so tired, but you cant sleep Stuck in reverse</string>
+    <string name="fab_add_note">Add Note</string>
+    <string name="content">Content</string>
+    <string name="title">Title</string>
+    <string name="save">Save</string>
+    <string name="diagnose">Diagnose</string>
+
 </resources>

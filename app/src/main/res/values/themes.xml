@@ -2,8 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FixU" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">#4CAF50</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorTertiary">@color/colorTertiary</item>
+        <item name="colorOnTertiary">@color/white</item>
     </style>
 
     <style name="Theme.FixU" parent="Base.Theme.FixU" />

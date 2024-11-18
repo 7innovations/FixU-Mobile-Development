@@ -15,7 +15,7 @@
         android:scaleType="centerCrop"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="48dp"
-        android:background="@drawable/round_quote_view"
+        android:background="@drawable/round_square"
         android:clipToOutline="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
