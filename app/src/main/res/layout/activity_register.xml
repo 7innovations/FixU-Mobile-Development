@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F1F8E9"
+    android:padding="24dp">
+
+    <!-- Logo atau Nama Aplikasi -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FixU"
+        android:textColor="#4CAF50"
+        android:textSize="60sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="25dp"
+        android:fontFamily="sans-serif-medium"/>
+
+    <!-- Text "Register" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="30sp"
+        android:textColor="#000000"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"/>
+
+    <!-- Text "Full Name" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Full Name"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif"/>
+
+    <!-- Input Full Name -->
+    <EditText
+        android:id="@+id/fullName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Input Full Name"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:inputType="textEmailAddress"
+        android:textColor="#000000"
+        android:textColorHint="#8F8F8F"/>
+
+    <!-- Text "Whatsapp" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whatsapp"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif"/>
+
+    <!-- Input Whatsapp -->
+    <EditText
+        android:id="@+id/whatsapp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Input Whatsapp"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:inputType="textEmailAddress"
+        android:textColor="#000000"
+        android:textColorHint="#8F8F8F"/>
+
+    <!-- Text "Email" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif"/>
+
+    <!-- Input Email -->
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Input Email"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:inputType="textEmailAddress"
+        android:textColor="#000000"
+        android:textColorHint="#8F8F8F"/>
+
+    <!-- Text "Password" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif"/>
+
+    <!-- Input Password -->
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Input Password"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#8F8F8F"/>
+
+    <!-- Text "Confirm Password" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif"/>
+
+    <!-- Input Password -->
+    <EditText
+        android:id="@+id/confirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Input Confirm Password"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#8F8F8F"/>
+
+    <!-- Tombol Register -->
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4CAF50"
+        android:fontFamily="sans-serif-medium"/>
+
+    <!-- Teks Have acc -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"
+        android:text="Have account? "
+        android:textSize="14sp"
+        android:textColor="#000000"/>
+
+    <!-- Link Login -->
+    <TextView
+        android:id="@+id/loginDirect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Login"
+        android:textSize="14sp"
+        android:textColor="#4CAF50"
+        android:fontFamily="sans-serif-medium"/>
+</LinearLayout>
