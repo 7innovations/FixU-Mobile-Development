@@ -14,5 +14,9 @@
     <string name="title">Title</string>
     <string name="save">Save</string>
     <string name="diagnose">Diagnose</string>
+    <string name="home">Home</string>
+    <string name="consultation">Consultation</string>
+    <string name="notes">Notes</string>
+    <string name="profile">Profile</string>
 
 </resources>

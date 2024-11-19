@@ -14,9 +14,9 @@
         android:layout_gravity="bottom"
         app:fabAlignmentMode="center"
         app:fabAnchorMode="cradle"
-        app:fabCradleMargin="20dp"
-        app:fabCradleVerticalOffset="6dp"
-        app:fabCradleRoundedCornerRadius="6dp">
+        app:fabCradleMargin="10dp"
+        app:fabCradleVerticalOffset="10dp"
+        app:fabCradleRoundedCornerRadius="5dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
@@ -25,7 +25,8 @@
             android:layout_marginEnd="12dp"
             android:background="@android:color/transparent"
             android:elevation="0dp"
-            >
+            app:menu="@menu/bottom_nav_menu"
+            app:labelVisibilityMode="labeled">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -34,7 +35,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_360_24"
+        android:src="@drawable/ic_consult"
         android:contentDescription="@string/diagnose"
         app:layout_anchor="@id/bottomAppBar"
         />
