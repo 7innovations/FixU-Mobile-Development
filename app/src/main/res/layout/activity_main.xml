@@ -16,6 +16,7 @@
         app:fabAnchorMode="cradle"
         app:fabCradleMargin="10dp"
         app:fabCradleVerticalOffset="10dp"
+        android:backgroundTint="?attr/colorTertiary"
         app:fabCradleRoundedCornerRadius="5dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,6 +27,7 @@
             android:background="@android:color/transparent"
             android:elevation="0dp"
             app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="?attr/colorOnPrimary"
             app:labelVisibilityMode="labeled">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -38,6 +40,7 @@
         android:src="@drawable/ic_consult"
         android:contentDescription="@string/diagnose"
         app:layout_anchor="@id/bottomAppBar"
+        android:backgroundTint="?attr/colorTertiary"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
