@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/consultation"
         android:src="@drawable/ic_consult"
+        android:backgroundTint="?attr/colorPrimary"
         app:layout_anchor="@id/bottomAppBar"
         />
 
