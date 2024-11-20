@@ -1,14 +1,10 @@
 package com.example.fixu
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.fixu.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,8 +14,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bottomNav: BottomNavigationView = binding.bottomNav
-        val navController = findNavController(R.id.nav_host_main)
-        bottomNav.setupWithNavController(navController)
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home_menu -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.notes_menu -> {
+                    replaceFragment(NotesFragment())
+                    true
+                }
+                else -> false
+            }
+        }
+
+        if (savedInstanceState == null) {
+            replaceFragment(HomeFragment())
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.commit()
     }
 }
