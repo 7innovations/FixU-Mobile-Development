@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F1F8E9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_profile_picture"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/ic_profile_picture_placeholder"
+                android:layout_marginTop="100dp"
+                android:background="#ffffff"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/img_profile_picture"
+                android:layout_alignTop="@+id/img_profile_picture"
+                android:layout_alignEnd="@+id/img_profile_picture"
+                android:layout_alignBottom="@+id/img_profile_picture"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:text="Edit Photo"
+                android:textColor="#000000"/>
+
+        </RelativeLayout>
+        <!-- Profile picture -->
+
+
+        <!-- User name -->
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salman Ramadan"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <!-- User email -->
+        <TextView
+            android:id="@+id/tv_user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="iskymalas@gmail.com"
+            android:textSize="14sp"
+            android:textColor="#888888"
+            android:layout_marginTop="4dp" />
+
+        <!-- Text "Full Name" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif"
+            android:layout_gravity="start"/>
+
+        <!-- Dark Mode Setting -->
+        <EditText
+            android:id="@+id/fullName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:hint="Input Full Name"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textColorHint="#8F8F8F"/>
+
+        <!-- Text "Whatsapp" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Whatsapp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif"
+            android:layout_gravity="start"/>
+
+        <!-- Input Whatsapp -->
+        <EditText
+            android:id="@+id/whatsapp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:hint="Input Whatsapp"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textColorHint="#8F8F8F"/>
+
+        <!-- Text "Email" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:layout_marginTop="24dp"
+            android:fontFamily="sans-serif"
+            android:layout_gravity="start"/>
+
+        <!-- Input Email -->
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:hint="Input Email"
+            android:background="@drawable/edit_text_background"
+            android:padding="12dp"
+            android:inputType="textEmailAddress"
+            android:textColor="#000000"
+            android:textColorHint="#8F8F8F"/>
+
+        <!-- Tombol Save Edit Profile -->
+        <Button
+            android:id="@+id/saveEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="36dp"
+            android:text="SAVE"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF50"
+            android:fontFamily="sans-serif-medium"/>
+
+    </LinearLayout>
+</ScrollView>

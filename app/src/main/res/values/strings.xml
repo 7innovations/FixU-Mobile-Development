@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FixU</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textDiagnoseDescription">Start your mental health check-up by taking a brief diagnostic survey. This will help us understand how you\'re feeling and provide personalized insights.</string>
 </resources>
