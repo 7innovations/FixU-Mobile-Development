@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">FixU</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="textDiagnoseDescription">Start your mental health check-up by taking a brief diagnostic survey. This will help us understand how you\'re feeling and provide personalized insights.</string>
+    <string name="quote_image">quote image</string>
+    <string name="history">History</string>
+    <string name="view_more">View More</string>
+    <string name="diagnose_result">Diagnose Result</string>
+    <string name="date">11/11/2024</string>
+    <string name="note_title">Title of Notes</string>
+    <string name="note_content">When you try your best, but you dont succeed When you get what you want, but not what you need When you feel so tired, but you cant sleep Stuck in reverse</string>
+    <string name="fab_add_note">Add Note</string>
+    <string name="content">Content</string>
+    <string name="title">Title</string>
+    <string name="save">Save</string>
+    <string name="diagnose">Diagnose</string>
+    <string name="home">Home</string>
+    <string name="consultation">Consultation</string>
+    <string name="notes">Notes</string>
+    <string name="profile">Profile</string>
+    <string name="consult">Consult</string>
+
+
 </resources>

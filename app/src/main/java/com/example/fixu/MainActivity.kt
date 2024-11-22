@@ -1,10 +1,7 @@
 package com.example.fixu
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.fixu.databinding.ActivityMainBinding
 
@@ -20,24 +17,27 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         if (savedInstanceState == null) {
-            loadFragment(ProfileFragment())
+            loadFragment(HomeFragment())
         }
 
         binding.bottomNav.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-//                R.id.navigation_home -> {
-//                    loadFragment(MainFragment())
-//                    true
-//                }
-                R.id.navigation_diagnose -> {
-                    loadFragment(DiagnoseFragment())
+                R.id.home_menu -> {
+                    loadFragment(HomeFragment())
                     true
                 }
-//                R.id.navigation_notes -> {
-//                    loadFragment(FinishedFragment())
-//                    true
-//                }
-                R.id.navigation_profile -> {
+                R.id.diagnose_menu -> {
+                    loadFragment(DiagnoseFragment())
+                    true
+                }R.id.consult_menu -> {
+                    loadFragment(ConsultFragment())
+                    true
+                }
+                R.id.notes_menu -> {
+                    loadFragment(NotesFragment())
+                    true
+                }
+                R.id.profile_menu -> {
                     loadFragment(ProfileFragment())
                     true
                 }
