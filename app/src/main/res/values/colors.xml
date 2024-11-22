@@ -8,5 +8,5 @@
     <color name="backgroundcolor">#F1F8E9</color>
     <color name="surfacecolor">#FFFFFF</color>
     <color name="errorcolor">#F44336</color>
-    <color name="gray">#5D5D5D</color>
+    <color name="gray">#8F8F8F</color>
 </resources>
