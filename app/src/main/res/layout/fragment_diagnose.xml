@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.DiagnoseFragment"
+    tools:context=".fragment.DiagnoseFragment"
     android:background="@color/backgroundcolor">
 
     <androidx.constraintlayout.widget.ConstraintLayout

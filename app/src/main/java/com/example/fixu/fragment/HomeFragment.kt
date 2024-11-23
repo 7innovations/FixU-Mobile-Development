@@ -1,4 +1,4 @@
-package com.example.fixu.Fragment
+package com.example.fixu.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

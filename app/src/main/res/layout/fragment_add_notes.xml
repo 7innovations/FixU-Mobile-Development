@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="8dp"
     android:background="@color/backgroundcolor"
-    tools:context=".Fragment.AddNotesFragment">
+    tools:context=".fragment.AddNotesFragment">
 
     <EditText
         android:id="@+id/editTextTitle"

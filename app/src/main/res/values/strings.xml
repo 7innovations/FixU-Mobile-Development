@@ -19,6 +19,19 @@
     <string name="notes">Notes</string>
     <string name="profile">Profile</string>
     <string name="consult">Consult</string>
+    <string name="signin">Sign in</string>
+    <string name="log_in_to_fixu">Log in to Fixu</string>
+    <string name="email">Email</string>
+    <string name="input_email">Input Email</string>
+    <string name="password">Password</string>
+    <string name="input_password">Input Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="doesn_t_have_account">Doesn\'t have account?</string>
+    <string name="input_confirm_password">Input Confirm Password</string>
+    <string name="have_account">Have account?</string>
+    <string name="log_in">Log in</string>
+    <string name="bgm">BGM</string>
+    <string name="dark_mode">Dark Mode</string>
 
 
 </resources>
