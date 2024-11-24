@@ -54,4 +54,7 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-auth")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.logging.interceptor)
 }
