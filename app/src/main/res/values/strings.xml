@@ -32,6 +32,14 @@
     <string name="log_in">Log in</string>
     <string name="bgm">BGM</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="create_your_free_account">Create Your Free Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="input_full_name">Input Full Name</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="input_whatsapp">Input Whatsapp</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="name">Name</string>
 
 
 </resources>
