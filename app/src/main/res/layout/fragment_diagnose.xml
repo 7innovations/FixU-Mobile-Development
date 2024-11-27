@@ -21,38 +21,60 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageView
-            android:id="@+id/logodiagnose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fixulogodiagnose"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logofixu"
-            android:layout_marginTop="36dp"/>
-
         <TextView
-            android:id="@+id/descdiagnose"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_question"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/textDiagnoseDescription"
-            app:layout_constraintTop_toBottomOf="@+id/logodiagnose"
-            android:gravity="center_horizontal"
-            android:padding="48dp"
-            android:textSize="15sp"/>
+            android:text="@string/status_question"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintTop_toBottomOf="@id/logofixu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <RadioGroup
+            android:id="@+id/rg_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@+id/tv_question"
+            app:layout_constraintTop_toBottomOf="@id/tv_question">
+
+            <RadioButton
+                android:id="@+id/rb_professional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Professional"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/rb_student"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Student"
+                android:textColor="@color/black" />
+        </RadioGroup>
 
         <Button
-            android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:id="@+id/btnStartdiagnose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAllCaps="true"
             android:text="get started"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#4CAF50"
+            android:textColor="@color/surfacecolor"
+            android:backgroundTint="@color/primary"
             android:fontFamily="sans-serif-medium"
             android:layout_marginStart="48dp"
             android:layout_marginEnd="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/descdiagnose"/>
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/rg_options"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

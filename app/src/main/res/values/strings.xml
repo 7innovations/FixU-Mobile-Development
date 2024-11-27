@@ -40,6 +40,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="phone_number">Phone Number</string>
     <string name="name">Name</string>
+    <string name="status_question">What\'s your current status?</string>
 
 
 </resources>
