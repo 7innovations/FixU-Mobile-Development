@@ -6,12 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fixu.ApiTestActivity
-import com.example.fixu.R
 import com.example.fixu.databinding.FragmentConsultBinding
-import com.example.fixu.databinding.FragmentProfileBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class ConsultFragment : Fragment() {
 
@@ -31,11 +26,6 @@ class ConsultFragment : Fragment() {
 
         _binding = FragmentConsultBinding.inflate(inflater,container, false)
         val view = binding.root
-
-        binding.btnTestSurvey.setOnClickListener {
-            val intent = Intent(requireActivity(), ApiTestActivity::class.java)
-            startActivity(intent)
-        }
 
         return view
     }
