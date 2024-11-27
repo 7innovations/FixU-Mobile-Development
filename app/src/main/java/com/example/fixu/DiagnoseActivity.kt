@@ -1,7 +1,9 @@
 package com.example.fixu
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +12,16 @@ import com.example.fixu.database.AnswersStudent
 import com.example.fixu.database.AppDatabase
 import com.example.fixu.database.Question
 import com.example.fixu.databinding.ActivityDiagnoseBinding
+import com.example.fixu.response.MLResponse
+import com.example.fixu.retrofit.ApiConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DiagnoseActivity : AppCompatActivity() {
 
@@ -96,6 +104,9 @@ class DiagnoseActivity : AppCompatActivity() {
         if (currentQuestionIndex < questions.size - 1) {
             currentQuestionIndex++
             showQuestion()
+            if (currentQuestionIndex == questions.size - 1) {
+                binding.btnNext.text = getString(R.string.submit)
+            }
         } else {
             submitAnswers()
         }
@@ -119,6 +130,8 @@ class DiagnoseActivity : AppCompatActivity() {
             // Tampilkan data pada Logcat
             Log.d("DiagnoseActivity", "Answers for Professional: $answersProfessional")
 
+            sendProfessionalData(answersProfessional)
+
         } else if (userStatus == "Student") {
             val answersStudent = AnswersStudent(
                 gender = answers[0],
@@ -135,6 +148,95 @@ class DiagnoseActivity : AppCompatActivity() {
 
             // Tampilkan data pada Logcat
             Log.d("DiagnoseActivity", "Answers for Student: $answersStudent")
+            sendStudentData(answersStudent)
+        }
+    }
+
+    private fun sendProfessionalData(answers: AnswersProfessional) {
+        val apiService = ApiConfig.getApiService()
+        val call = apiService.postProfessionalAnswers(answers)
+        showLoading(true)
+
+        call.enqueue(object : Callback<MLResponse> {
+            override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
+                if (response.isSuccessful) {
+                    showLoading(false)
+                    val apiResponse = response.body()
+                    val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
+                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse?.feedback)
+                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse?.probability.toString())
+                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse?.result)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                } else {
+                    showLoading(false)
+                    val errorBody = response.errorBody()?.string()
+                    val errorMessage = if (errorBody != null) {
+                        try {
+                            JSONObject(errorBody).getString("error")
+                        } catch (e: Exception) {
+                            "Unknown error occurred"
+                        }
+                    } else {
+                        "No error details available"
+                    }
+                    Toast.makeText(this@DiagnoseActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<MLResponse>, t: Throwable) {
+                showLoading(false)
+                Toast.makeText(this@DiagnoseActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun sendStudentData(answers: AnswersStudent) {
+        val apiService = ApiConfig.getApiService()
+        val call = apiService.postStudentAnswers(answers)
+        showLoading(true)
+
+        call.enqueue(object : Callback<MLResponse> {
+            override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
+                if (response.isSuccessful) {
+                    showLoading(false)
+                    val apiResponse = response.body()
+                    val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
+                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse?.feedback)
+                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse?.probability.toString())
+                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse?.result)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                } else {
+                    showLoading(false)
+                    val errorBody = response.errorBody()?.string()
+                    val errorMessage = if (errorBody != null) {
+                        try {
+                            JSONObject(errorBody).getString("error")
+                        } catch (e: Exception) {
+                            "Unknown error occurred"
+                        }
+                    } else {
+                        "No error details available"
+                    }
+                    Toast.makeText(this@DiagnoseActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<MLResponse>, t: Throwable) {
+                showLoading(false)
+                Toast.makeText(this@DiagnoseActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.resultLoading.visibility = View.VISIBLE
+        } else {
+            binding.resultLoading.visibility = View.GONE
         }
     }
 
