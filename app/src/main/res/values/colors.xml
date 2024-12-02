@@ -9,4 +9,5 @@
     <color name="surfacecolor">#FFFFFF</color>
     <color name="errorcolor">#F44336</color>
     <color name="gray">#8F8F8F</color>
+    <color name="third">#303030</color>
 </resources>

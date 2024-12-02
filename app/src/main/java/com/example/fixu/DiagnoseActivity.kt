@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,12 +42,20 @@ class DiagnoseActivity : AppCompatActivity() {
 
         userStatus = intent.getStringExtra("USER_STATUS") ?: ""
 
+        binding.progressBar.max = 100 // Setting max to 100 to represent percentages
+        updateProgressBar()
+
         loadQuestions()
 
         binding.btnNext.setOnClickListener {
             saveAnswer()
             moveToNextQuestion()
         }
+
+        binding.btnBack.setOnClickListener{
+            BackToBeforeQuestion()
+        }
+
     }
 
     private fun loadQuestions() {
@@ -80,6 +89,7 @@ class DiagnoseActivity : AppCompatActivity() {
                 binding.editTextAnswer.setText("")
             }
         }
+        updateProgressBar()
     }
 
     private fun saveAnswer() {
@@ -110,6 +120,32 @@ class DiagnoseActivity : AppCompatActivity() {
         } else {
             submitAnswers()
         }
+    }
+
+    private fun BackToBeforeQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--
+
+            if (answers.isNotEmpty()) {
+                answers.removeAt(answers.size - 1)
+            }
+
+            binding.btnNext.text = if (currentQuestionIndex == questions.size - 1) {
+                getString(R.string.submit)
+            } else {
+                getString(R.string.next)
+            }
+
+            showQuestion()
+        } else {
+            Toast.makeText(this, "You are already on the first question", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun updateProgressBar() {
+        val progress = ((currentQuestionIndex + 1).toFloat() / questions.size * 100).toInt()
+        binding.progressBar.progress = progress
     }
 
     private fun submitAnswers() {

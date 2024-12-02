@@ -45,5 +45,7 @@
     <string name="feedback_result">"The assessment suggests a low likelihood of current depression, but your history of suicidal thoughts and current high work pressure and financial stress warrant attention. It's understandable that these factors impact your sleep and overall well–being.\n To improve, consider prioritizing sleep (aim for 7–8 hours) even if it means adjusting your work schedule slightly. Explore stress-management techniques like mindfulness or exercise, even in short bursts. Finally, reaching out to a therapist or counselor to process past suicidal thoughts could be incredibly beneficial."</string>
 <string name="percent_result">98,89</string>
     <string name="back_home">Back Home</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
 
 </resources>

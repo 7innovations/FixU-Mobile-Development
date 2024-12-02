@@ -6,6 +6,8 @@
         <item name="colorOnPrimary">@color/surfacecolor</item>
         <item name="colorTertiary">@color/secondaryvariant</item>
         <item name="colorOnTertiary">@color/surfacecolor</item>
+        <item name="colorOnPrimaryContainer">@color/third</item>
+        <item name="colorContainer">@color/surfacecolor</item>
     </style>
 
     <style name="Theme.FixU" parent="Base.Theme.FixU" />
