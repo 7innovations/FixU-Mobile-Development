@@ -4,25 +4,30 @@
     <item
         android:id="@+id/home_menu"
         android:icon="@drawable/home"
-        android:title="@string/home" />
+        android:title="@string/home"
+        />
 
     <item
         android:id="@+id/diagnose_menu"
         android:icon="@drawable/diagnose"
-        android:title="@string/diagnose" />
+        android:title="@string/diagnose"
+        />
 
     <item
         android:id="@+id/consult_menu"
         android:icon="@drawable/ic_consult"
-        android:title="@string/consult"/>
+        android:title="@string/consult"
+        />
 
     <item
         android:id="@+id/notes_menu"
         android:icon="@drawable/notes"
-        android:title="@string/notes" />
+        android:title="@string/notes"
+        />
     <item
         android:id="@+id/profile_menu"
         android:icon="@drawable/profile"
-        android:title="@string/profile" />
+        android:title="@string/profile"
+        />
 
 </menu>

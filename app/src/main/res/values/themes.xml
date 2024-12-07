@@ -6,9 +6,15 @@
         <item name="colorOnPrimary">@color/surfacecolor</item>
         <item name="colorTertiary">@color/secondaryvariant</item>
         <item name="colorOnTertiary">@color/surfacecolor</item>
-        <item name="colorOnPrimaryContainer">@color/third</item>
+        <item name="colorOnPrimaryContainer">@color/darkrgray</item>
         <item name="colorContainer">@color/surfacecolor</item>
     </style>
 
     <style name="Theme.FixU" parent="Base.Theme.FixU" />
+
+    <style name="CustomBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemRippleColor">@android:color/transparent</item>
+    </style>
+
+
 </resources>
