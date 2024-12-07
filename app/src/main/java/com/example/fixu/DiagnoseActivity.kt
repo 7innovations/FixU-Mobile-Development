@@ -27,6 +27,7 @@ import retrofit2.Response
 class DiagnoseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDiagnoseBinding
+    private lateinit var sessionManager: SessionManager
     private lateinit var database: AppDatabase
     private var questions = listOf<Question>()
     private var currentQuestionIndex = 0
@@ -37,6 +38,8 @@ class DiagnoseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDiagnoseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sessionManager = SessionManager(this)
 
         database = AppDatabase.getInstance(this)
 
@@ -151,6 +154,7 @@ class DiagnoseActivity : AppCompatActivity() {
     private fun submitAnswers() {
         if (userStatus == "Professional") {
             val answersProfessional = AnswersProfessional(
+                userId = sessionManager.getUserId() ?: "",
                 gender = answers[0],
                 age = answers[1].toIntOrNull() ?: 0,
                 workPressure = answers[2].toIntOrNull() ?: 0,
@@ -170,6 +174,7 @@ class DiagnoseActivity : AppCompatActivity() {
 
         } else if (userStatus == "Student") {
             val answersStudent = AnswersStudent(
+                userId = sessionManager.getUserId() ?: "",
                 gender = answers[0],
                 age = answers[1].toIntOrNull() ?: 0,
                 academicPressure = answers[2].toIntOrNull() ?: 0,
@@ -189,75 +194,65 @@ class DiagnoseActivity : AppCompatActivity() {
     }
 
     private fun sendProfessionalData(answers: AnswersProfessional) {
-        val apiService = ApiConfig.getApiService()
+        val apiService = ApiConfig.getApiService(this)
         val call = apiService.postProfessionalAnswers(answers)
         showLoading(true)
 
         call.enqueue(object : Callback<MLResponse> {
             override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
-                if (response.isSuccessful) {
-                    showLoading(false)
-                    val apiResponse = response.body()
+                showLoading(false)
+                val apiResponse = response.body()
+                if (response.isSuccessful && apiResponse != null) {
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
-                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse?.feedback)
-                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse?.probability.toString())
-                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse?.result)
+                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse.result.firstOrNull()?.feedback)
+                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse.result.firstOrNull()?.probability.toString())
+                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse.result.firstOrNull()?.result)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 } else {
-                    showLoading(false)
-                    val errorBody = response.errorBody()?.string()
-                    val errorMessage = if (errorBody != null) {
-                        try {
-                            JSONObject(errorBody).getString("error")
-                        } catch (e: Exception) {
-                            "Unknown error occurred"
-                        }
+                    if (response.code() == 401){
+                        Toast.makeText(this@DiagnoseActivity, "Token Expired", Toast.LENGTH_SHORT).show()
+
                     } else {
-                        "No error details available"
+                        Toast.makeText(this@DiagnoseActivity, "Failed to reach API", Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(this@DiagnoseActivity, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<MLResponse>, t: Throwable) {
                 showLoading(false)
+                Log.d("Error API", "Failed ${t.message}")
                 Toast.makeText(this@DiagnoseActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun sendStudentData(answers: AnswersStudent) {
-        val apiService = ApiConfig.getApiService()
+        val apiService = ApiConfig.getApiService(this)
         val call = apiService.postStudentAnswers(answers)
         showLoading(true)
 
         call.enqueue(object : Callback<MLResponse> {
             override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
-                if (response.isSuccessful) {
-                    showLoading(false)
-                    val apiResponse = response.body()
+                showLoading(false)
+                val apiResponse = response.body()
+                if (response.isSuccessful && apiResponse != null) {
+
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
-                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse?.feedback)
-                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse?.probability.toString())
-                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse?.result)
+                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse.result.firstOrNull()?.feedback)
+                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse.result.firstOrNull()?.probability.toString())
+                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse.result.firstOrNull()?.result)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 } else {
-                    showLoading(false)
-                    val errorBody = response.errorBody()?.string()
-                    val errorMessage = if (errorBody != null) {
-                        try {
-                            JSONObject(errorBody).getString("error")
-                        } catch (e: Exception) {
-                            "Unknown error occurred"
-                        }
+                    if (response.code() == 401){
+                        Toast.makeText(this@DiagnoseActivity, "Token Expired", Toast.LENGTH_SHORT).show()
+
                     } else {
-                        "No error details available"
+                        Toast.makeText(this@DiagnoseActivity, "Failed to reach API", Toast.LENGTH_SHORT).show()
                     }
-                    Toast.makeText(this@DiagnoseActivity, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
 

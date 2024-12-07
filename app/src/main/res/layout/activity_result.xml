@@ -13,15 +13,22 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_result"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="60dp" />
+        app:layout_constraintGuide_begin="68dp" />
 
         <TextView
             android:id="@+id/tv_diagnose_result"

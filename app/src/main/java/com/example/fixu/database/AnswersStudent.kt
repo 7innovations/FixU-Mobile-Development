@@ -3,6 +3,7 @@ package com.example.fixu.database
 import com.google.gson.annotations.SerializedName
 
 data class AnswersStudent(
+    @SerializedName("uid") val userId: String,
     @SerializedName("Gender") val gender: String,
     @SerializedName("Age") val age: Int,
     @SerializedName("Academic Pressure") val academicPressure: Int,

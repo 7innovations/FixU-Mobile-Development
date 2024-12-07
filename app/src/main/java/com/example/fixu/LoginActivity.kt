@@ -8,28 +8,30 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fixu.database.LoginRequest
 import com.example.fixu.databinding.ActivityLoginBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.example.fixu.response.LoginResponse
+import com.example.fixu.retrofit.ApiConfig
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var auth: FirebaseAuth
     private lateinit var email: String
     private lateinit var password: String
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = Firebase.auth
-
         onFocusEmailListener()
         onFocusPasswordListener()
 
+        sessionManager = SessionManager(this)
 
         binding.loginButton.setOnClickListener {
             if (isInputNotEmpty()) {
@@ -49,42 +51,57 @@ class LoginActivity : AppCompatActivity() {
 
     public override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
+
+        if (sessionManager.isLoggedIn()) {
+            moveToMain()
         }
     }
 
     private fun loginAccount() {
+
         showLoading(true)
+
         email = binding.edtEmail.getText().toString().trim()
         password = binding.edtPassword.getText().toString().trim()
 
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    showLoading(false)
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    showLoading(false)
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+        val loginRequest = LoginRequest(email, password)
+
+        val client = ApiConfig.getApiService(this).login(loginRequest)
+        client.enqueue(object: Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                showLoading(false)
+                val loginResponseBody = response.body()
+                if (response.isSuccessful && loginResponseBody != null) {
+                    loginResponseBody.let {
+                        sessionManager.saveSession(
+                            token = it.token,
+                            userId = it.user.uid,
+                            email = it.user.email,
+                            name = it.user.fullname,
+                            whatsapp = it.user.whatsapp
+                        )
+                        Toast.makeText(this@LoginActivity, it.message, Toast.LENGTH_SHORT).show()
+                        moveToMain()
+                    }
+                }
+                else {
+                    Toast.makeText(this@LoginActivity, "Wrong email or password", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                showLoading(false)
+                Log.d("Error API", "Error: ${t.message}")
+                Toast.makeText(this@LoginActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun moveToRegister() {

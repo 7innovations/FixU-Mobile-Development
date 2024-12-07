@@ -1,60 +1,148 @@
 package com.example.fixu.fragment
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fixu.HistoryAdapter
+import com.example.fixu.LoginActivity
 import com.example.fixu.R
+import com.example.fixu.SessionManager
+import com.example.fixu.databinding.FragmentHistoryBinding
+import com.example.fixu.databinding.FragmentHomeBinding
+import com.example.fixu.response.HistoryDataItem
+import com.example.fixu.response.HistoryResponse
+import com.example.fixu.retrofit.ApiConfig
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var _binding: FragmentHistoryBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        sessionManager  = SessionManager(requireContext())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false)
+    ): View {
+
+
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvHistoryList.layoutManager = layoutManager
+
+        getHistoryData()
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val toolbar: Toolbar = binding.toolbarHistoryList
+        (requireActivity() as AppCompatActivity).setSupportActionBar(toolbar)
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back_24)
+        }
+
+        toolbar.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().supportFragmentManager.popBackStack()
+            }
+        })
+    }
+
+    private fun getHistoryData() {
+        showLoading(true)
+        val client = ApiConfig.getApiService(requireContext()).getHistory()
+        client.enqueue(object: Callback<HistoryResponse> {
+            override fun onResponse(
+                call: Call<HistoryResponse>,
+                response: Response<HistoryResponse>
+            ) {
+                if (view == null) return
+                showLoading(false)
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        setHistoryData(responseBody.data)
+                    }
+                } else if (response.code() == 401) {
+                    Toast.makeText(requireContext(), "Session Ended: Token Expired", Toast.LENGTH_SHORT).show()
+                    logoutWhenTokenExpired()
+                } else {
+                    Log.d("API Error", "Code: ${response.code()}")
+                    Log.d("API Error", "Code: ${response.message()} \n ${response.errorBody()}")
+                    Toast.makeText(requireContext(), "Failed to load history data", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
+                if (view == null) return
+                showLoading(false)
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun setHistoryData(historyData: List<HistoryDataItem>) {
+        _binding?.let {
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            val sortedHistoryData = historyData.sortedByDescending { item ->
+                runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
+            }
+
+            val adapter = HistoryAdapter()
+            adapter.submitList(sortedHistoryData)
+            binding.rvHistoryList.adapter = adapter
+        }
+    }
+
+    fun logoutWhenTokenExpired() {
+        sessionManager.clearSession()
+        val intent = Intent(requireActivity(), LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        _binding.let {
+            if (isLoading) {
+                binding.historyListLoading.visibility = View.VISIBLE
+            } else {
+                binding.historyListLoading.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

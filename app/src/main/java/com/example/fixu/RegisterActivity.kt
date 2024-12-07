@@ -10,24 +10,28 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fixu.database.SignUpRequest
 import com.example.fixu.databinding.ActivityRegisterBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.example.fixu.response.SignUpResponse
+import com.example.fixu.retrofit.ApiConfig
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var auth: FirebaseAuth
     private lateinit var email: String
     private lateinit var password: String
+    private lateinit var confirmPassword: String
+    private lateinit var fullname: String
+    private lateinit var whatsapp: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = Firebase.auth
 
         onFocusNameListener()
         onFocusPhoneNumListener()
@@ -70,29 +74,39 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun createAccount() {
         showLoading(true)
+        fullname = binding.edtName.getText().toString().trim()
         email = binding.edtEmail.getText().toString().trim()
         password = binding.edtPassword.getText().toString().trim()
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    showLoading(false)
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    showLoading(false)
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+        confirmPassword = binding.edtConfirmPassword.getText().toString().trim()
+        whatsapp = binding.edtPhoneNumber.getText().toString().trim()
+
+        val signupRequest = SignUpRequest(
+                fullname,
+                email,
+                whatsapp,
+                password,
+                confirmPassword
+            )
+
+        val client = ApiConfig.getApiService(this).signUp(signupRequest)
+        client.enqueue(object: Callback<SignUpResponse> {
+            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
+                showLoading(false)
+                val registerResponseBody = response.body()
+                if (response.isSuccessful && registerResponseBody != null) {
+                    Toast.makeText(this@RegisterActivity, registerResponseBody.message, Toast.LENGTH_SHORT).show()
+                    moveToLogin()
+                }
+                else {
+                    Toast.makeText(this@RegisterActivity, "Failed: ${registerResponseBody?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                showLoading(false)
+                Toast.makeText(this@RegisterActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun moveToLogin() {

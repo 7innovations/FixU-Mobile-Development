@@ -2,6 +2,7 @@ package com.example.fixu
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,6 +18,20 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val isFromAdapter = intent.getBooleanExtra(EXTRA_FROM_ADAPTER, false)
+        binding.btnBackHome.visibility = View.VISIBLE
+
+        if (isFromAdapter) {
+            setSupportActionBar(binding.toolbarResult)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24)
+            binding.btnBackHome.visibility = View.GONE
+        }
+
+        binding.toolbarResult.setNavigationOnClickListener {
+            finish()
+        }
 
         val result = intent.getStringExtra(EXTRA_RESULT)
         val feedback = intent.getStringExtra(EXTRA_FEEDBACK)
@@ -49,5 +64,6 @@ class ResultActivity : AppCompatActivity() {
         const val EXTRA_RESULT = "extra_result"
         const val EXTRA_PROBABILITY = "extra_probability"
         const val EXTRA_FEEDBACK = "extra_feedback"
+        const val EXTRA_FROM_ADAPTER = "extra_from_adapter"
     }
 }

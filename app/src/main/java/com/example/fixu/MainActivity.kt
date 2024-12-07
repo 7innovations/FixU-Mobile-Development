@@ -19,8 +19,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
         if (savedInstanceState == null) {
             loadFragment(HomeFragment())
         }
@@ -56,4 +54,5 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
+
 }

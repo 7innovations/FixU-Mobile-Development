@@ -7,18 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.fixu.LoginActivity
+import com.example.fixu.SessionManager
 import com.example.fixu.databinding.FragmentProfileBinding
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        sessionManager = SessionManager(requireContext())
     }
 
     override fun onCreateView(
@@ -30,9 +31,15 @@ class ProfileFragment : Fragment() {
         val view = binding.root
 
         binding.btnLogout.setOnClickListener {
-            Firebase.auth.signOut()
+            sessionManager.clearSession()
             moveToSignIn()
         }
+
+        val userName = sessionManager.getUserName()
+        val email = sessionManager.getUserEmail()
+
+        binding.tvUsername.text = userName
+        binding.tvUserEmail.text = email
 
         return view
     }
