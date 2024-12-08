@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 data class MLResponse(
 
 	@field:SerializedName("result")
-	val result: List<ResultItem>,
+	val result: Result,
 
 	@field:SerializedName("message")
 	val message: String
 )
 
-data class ResultItem(
+data class Result(
 
 	@field:SerializedName("feedback")
 	val feedback: String,
@@ -20,9 +20,5 @@ data class ResultItem(
 	val result: String,
 
 	@field:SerializedName("probability")
-	val probability: Any,
-
-	@field:SerializedName("created_at")
-	val createdAt: String,
-
+	val probability: Any
 )

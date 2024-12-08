@@ -20,7 +20,7 @@ class ApiConfig {
                 .addInterceptor(AuthInterceptor(sessionManager))
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.29:3000")
+                .baseUrl("https://fixu-api-1045437150026.asia-southeast2.run.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

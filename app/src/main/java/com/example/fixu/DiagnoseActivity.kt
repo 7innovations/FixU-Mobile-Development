@@ -204,9 +204,9 @@ class DiagnoseActivity : AppCompatActivity() {
                 val apiResponse = response.body()
                 if (response.isSuccessful && apiResponse != null) {
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
-                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse.result.firstOrNull()?.feedback)
-                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse.result.firstOrNull()?.probability.toString())
-                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse.result.firstOrNull()?.result)
+                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse.result.feedback)
+                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse.result.probability.toString())
+                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse.result.result)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
@@ -240,9 +240,9 @@ class DiagnoseActivity : AppCompatActivity() {
                 if (response.isSuccessful && apiResponse != null) {
 
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
-                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse.result.firstOrNull()?.feedback)
-                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse.result.firstOrNull()?.probability.toString())
-                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse.result.firstOrNull()?.result)
+                    intent.putExtra(ResultActivity.EXTRA_FEEDBACK, apiResponse.result.feedback)
+                    intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponse.result.probability.toString())
+                    intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponse.result.result)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
