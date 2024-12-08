@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="8dp"
-    android:background="@color/backgroundcolor"
-    tools:context=".fragment.AddNotesFragment">
+    tools:context=".AddNoteActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_add_note"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorTertiary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white" />
 
     <EditText
         android:id="@+id/editTextTitle"
@@ -18,6 +24,7 @@
         android:fontFamily="sans-serif-medium"
         android:hint="@string/title"
         android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_add_note"
         android:maxLines="1"
         android:minHeight="48dp"
         android:padding="8dp"
@@ -27,32 +34,21 @@
         android:autofillHints="none"
         tools:ignore="VisualLintTextFieldSize" />
 
-
     <EditText
         android:id="@+id/editTextContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:autofillHints="none"
         android:background="@null"
-        android:gravity="top"
         android:hint="@string/content"
         android:inputType="textMultiLine"
         android:padding="8dp"
         android:scrollbars="vertical"
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
+        android:gravity="top"
         android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/editTextTitle"
         tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/save"
-        android:src="@drawable/ic_check_circle_24"
-        app:backgroundTint="@color/secondaryvariant"
-        app:tint="@color/surfacecolor" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
