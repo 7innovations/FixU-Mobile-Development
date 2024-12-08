@@ -58,10 +58,7 @@
                     android:id="@+id/radio_group_answers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:divider="@drawable/radio_divider"
-                    android:dividerPadding="8dp"
-                    android:showDividers="middle" />
+                    android:orientation="vertical"/>
 
                 <!-- EditText untuk Jawaban Teks -->
                 <EditText
