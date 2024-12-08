@@ -18,7 +18,7 @@ class HistoryAdapter : ListAdapter<HistoryDataItem, HistoryAdapter.MyViewHolder>
             val dateFormatInput = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
             val dateFormatOutput = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
-            val formattedDate = history.createdAt?.let { dateString ->
+            val formattedDate = history.createdAt.let { dateString ->
                 runCatching {
                     val parsedDate = dateFormatInput.parse(dateString)
                     dateFormatOutput.format(parsedDate ?: Date())

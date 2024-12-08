@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.fixu.fragment.ConsultFragment
 import com.example.fixu.fragment.DiagnoseFragment
 import com.example.fixu.fragment.HomeFragment
-import com.example.fixu.fragment.NotesFragment
+import com.example.fixu.notes.NotesFragment
 import com.example.fixu.fragment.ProfileFragment
 import com.example.fixu.databinding.ActivityMainBinding
 

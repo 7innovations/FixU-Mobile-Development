@@ -12,7 +12,11 @@ class AuthInterceptor(private val sessionManager: SessionManager) : Interceptor 
         val protectedEndpoints = listOf(
             "/predict/professional/result",
             "/predict/student/result",
-            "/history"
+            "/history",
+            "/notes",
+            "/notes/add",
+            "/notes/update/{id}",
+            "notes/{id}"
         )
 
         val needsAuth = protectedEndpoints.any { endpoint -> url.contains(endpoint) }
