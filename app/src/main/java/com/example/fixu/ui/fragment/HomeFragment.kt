@@ -77,10 +77,8 @@ class HomeFragment : Fragment() {
                    }
                } else if (response.code() == 401) {
                    Toast.makeText(requireContext(), "Session Ended: Token Expired", Toast.LENGTH_SHORT).show()
-                   logoutWhenTokenExpired()
+//                   logoutWhenTokenExpired()
                } else {
-                   Log.d("API Error", "Code: ${response.code()}")
-                   Log.d("API Error", "Code: ${response.message()} \n ${response.errorBody()}")
                    Toast.makeText(requireContext(), "Failed to load history data", Toast.LENGTH_SHORT).show()
                }
             }

@@ -7,7 +7,7 @@ import com.example.fixu.ui.fragment.ConsultFragment
 import com.example.fixu.ui.fragment.DiagnoseFragment
 import com.example.fixu.ui.fragment.HomeFragment
 import com.example.fixu.ui.notes.NotesFragment
-import com.example.fixu.ui.fragment.ProfileFragment
+import com.example.fixu.ui.profile.ProfileFragment
 import com.example.fixu.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
