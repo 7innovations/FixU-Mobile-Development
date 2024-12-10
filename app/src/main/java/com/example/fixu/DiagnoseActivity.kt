@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -13,6 +12,7 @@ import com.example.fixu.database.AnswersProfessional
 import com.example.fixu.database.AnswersStudent
 import com.example.fixu.database.AppDatabase
 import com.example.fixu.database.Question
+import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.ActivityDiagnoseBinding
 import com.example.fixu.response.MLResponse
 import com.example.fixu.retrofit.ApiConfig
@@ -20,7 +20,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

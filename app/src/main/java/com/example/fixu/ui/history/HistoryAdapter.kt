@@ -1,4 +1,4 @@
-package com.example.fixu
+package com.example.fixu.ui.history
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fixu.ResultActivity
 import com.example.fixu.databinding.HistoryItemBinding
 import com.example.fixu.response.HistoryDataItem
 import java.text.SimpleDateFormat
@@ -18,7 +19,7 @@ class HistoryAdapter : ListAdapter<HistoryDataItem, HistoryAdapter.MyViewHolder>
             val dateFormatInput = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
             val dateFormatOutput = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
-            val formattedDate = history.createdAt?.let { dateString ->
+            val formattedDate = history.createdAt.let { dateString ->
                 runCatching {
                     val parsedDate = dateFormatInput.parse(dateString)
                     dateFormatOutput.format(parsedDate ?: Date())

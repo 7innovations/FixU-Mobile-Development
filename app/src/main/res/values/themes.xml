@@ -6,6 +6,7 @@
 
         <item name="colorPrimaryContainer">@color/white</item>
         <item name="colorOnPrimaryContainer">@color/darkrgray</item>
+<<<<<<< HEAD
 
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -15,6 +16,9 @@
 
 
 
+=======
+        <item name="colorSurface">@color/surfacecolor</item>
+>>>>>>> 027c588ecc3661a7c5aaa5debc6aafbd05d8fe84
     </style>
 
     <style name="Theme.FixU" parent="Base.Theme.FixU" />

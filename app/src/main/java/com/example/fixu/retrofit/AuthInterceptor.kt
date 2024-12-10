@@ -1,6 +1,6 @@
 package com.example.fixu.retrofit
 
-import com.example.fixu.SessionManager
+import com.example.fixu.database.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -12,7 +12,11 @@ class AuthInterceptor(private val sessionManager: SessionManager) : Interceptor 
         val protectedEndpoints = listOf(
             "/predict/professional/result",
             "/predict/student/result",
-            "/history"
+            "/history",
+            "/notes",
+            "/notes/add",
+            "/notes/update/{id}",
+            "notes/{id}"
         )
 
         val needsAuth = protectedEndpoints.any { endpoint -> url.contains(endpoint) }
