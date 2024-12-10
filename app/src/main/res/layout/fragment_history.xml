@@ -7,7 +7,7 @@
     android:background="@color/backgroundcolor"
     android:clipToPadding="false"
     android:paddingBottom="68dp"
-    tools:context=".fragment.HistoryFragment">
+    tools:context=".ui.history.HistoryFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_history_list"

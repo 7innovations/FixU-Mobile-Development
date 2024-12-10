@@ -1,4 +1,4 @@
-package com.example.fixu.notes
+package com.example.fixu.ui.notes
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,16 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fixu.AddNoteActivity
 import com.example.fixu.databinding.NoteItemBinding
 import com.example.fixu.response.NoteDataItem
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class NoteAdapter : ListAdapter<NoteDataItem, NoteAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class NoteAdapter(private val onNoteClick: (NoteDataItem) -> Unit) : ListAdapter<NoteDataItem, NoteAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(note: NoteDataItem) {
+        fun bind(note: NoteDataItem,  onNoteClick: (NoteDataItem) -> Unit) {
             val dateFormatInput = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
             val dateFormatOutput = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
@@ -37,6 +36,9 @@ class NoteAdapter : ListAdapter<NoteDataItem, NoteAdapter.MyViewHolder>(DIFF_CAL
                 intent.putExtra("NOTEID_EXTRA", note.id.toString())
                 context.startActivity(intent)
             }
+            itemView.setOnClickListener {
+                onNoteClick(note)
+            }
         }
     }
 
@@ -48,7 +50,7 @@ class NoteAdapter : ListAdapter<NoteDataItem, NoteAdapter.MyViewHolder>(DIFF_CAL
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val note = getItem(position)
-        holder.bind(note)
+        holder.bind(note, onNoteClick)
     }
 
 
@@ -58,7 +60,9 @@ class NoteAdapter : ListAdapter<NoteDataItem, NoteAdapter.MyViewHolder>(DIFF_CAL
                 return oldItem == newItem
             }
             override fun areContentsTheSame(oldItem: NoteDataItem, newItem: NoteDataItem): Boolean {
-                return oldItem == newItem
+                return oldItem.title == newItem.title &&
+                        oldItem.content == newItem.content &&
+                        oldItem.updatedAt == newItem.updatedAt
             }
         }
     }

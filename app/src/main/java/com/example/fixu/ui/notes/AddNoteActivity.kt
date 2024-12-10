@@ -1,4 +1,4 @@
-package com.example.fixu
+package com.example.fixu.ui.notes
 
 import android.app.Activity
 import android.content.Intent
@@ -7,17 +7,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.fixu.R
+import com.example.fixu.database.SessionManager
 import com.example.fixu.database.AddNoteRequest
-import com.example.fixu.database.AnswersStudent
 import com.example.fixu.database.EditNoteRequest
 import com.example.fixu.databinding.ActivityAddNoteBinding
-import com.example.fixu.response.MLResponse
-import com.example.fixu.response.NoteResponse
+import com.example.fixu.response.DeleteNoteResponse
 import com.example.fixu.response.PatchNoteResponse
 import com.example.fixu.response.PostNoteResponse
 import com.example.fixu.retrofit.ApiConfig
@@ -82,6 +79,11 @@ class AddNoteActivity : AppCompatActivity() {
             R.id.save_note -> {
                 saveNote()
             }
+            R.id.delete_note -> {
+                if (isEdit) {
+                    deleteNote(noteId)
+                }
+            }
         }
         return true
     }
@@ -90,7 +92,7 @@ class AddNoteActivity : AppCompatActivity() {
         val titleText = binding.editTextTitle.text.toString()
         val contentText = binding.editTextContent.text.toString()
 
-        if (titleText.isNotEmpty()) {
+        if (titleText.isNotEmpty() && contentText.isNotEmpty()) {
             if (isEdit) {
                 editNote(
                     noteId,
@@ -114,8 +116,10 @@ class AddNoteActivity : AppCompatActivity() {
 
         } else {
             binding.editTextTitle.error = "Title is required"
+            binding.editTextContent.error = "content is required"
         }
     }
+
 
     private fun postNote(note: AddNoteRequest) {
 
@@ -173,6 +177,41 @@ class AddNoteActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun deleteNote(noteId: String) {
+        showLoading(true)
+        val client = ApiConfig.getApiService(this).deleteNote(noteId)
+
+        client.enqueue(object : Callback<DeleteNoteResponse> {
+            override fun onResponse(
+                call: Call<DeleteNoteResponse>,
+                response: Response<DeleteNoteResponse>
+            ) {
+                showLoading(false)
+                val apiResponse = response.body()
+                if (response.isSuccessful && apiResponse != null) {
+                    Toast.makeText(this@AddNoteActivity, "Note deleted successfully", Toast.LENGTH_SHORT).show()
+                    val intent = Intent()
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                } else {
+                    if (response.code() == 401){
+                        Toast.makeText(this@AddNoteActivity, "Unauthorized or Token Expired", Toast.LENGTH_SHORT).show()
+
+                    } else {
+                        Toast.makeText(this@AddNoteActivity, "Failed to reach API", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<DeleteNoteResponse>, t: Throwable) {
+                showLoading(false)
+                Toast.makeText(this@AddNoteActivity, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {

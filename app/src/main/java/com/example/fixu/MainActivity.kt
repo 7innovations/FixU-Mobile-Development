@@ -3,11 +3,11 @@ package com.example.fixu
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.fixu.fragment.ConsultFragment
-import com.example.fixu.fragment.DiagnoseFragment
-import com.example.fixu.fragment.HomeFragment
-import com.example.fixu.notes.NotesFragment
-import com.example.fixu.fragment.ProfileFragment
+import com.example.fixu.ui.fragment.ConsultFragment
+import com.example.fixu.ui.fragment.DiagnoseFragment
+import com.example.fixu.ui.fragment.HomeFragment
+import com.example.fixu.ui.notes.NotesFragment
+import com.example.fixu.ui.fragment.ProfileFragment
 import com.example.fixu.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

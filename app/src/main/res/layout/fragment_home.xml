@@ -13,7 +13,7 @@
     android:fitsSystemWindows="true"
     android:clipToPadding="false"
     android:paddingBottom="16dp"
-    tools:context=".fragment.HomeFragment">
+    tools:context=".ui.fragment.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
         app:layout_constraintTop_toTopOf="parent"

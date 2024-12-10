@@ -1,4 +1,4 @@
-package com.example.fixu.fragment
+package com.example.fixu.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle

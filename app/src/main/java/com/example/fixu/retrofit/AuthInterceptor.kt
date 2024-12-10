@@ -1,6 +1,6 @@
 package com.example.fixu.retrofit
 
-import com.example.fixu.SessionManager
+import com.example.fixu.database.SessionManager
 import okhttp3.Interceptor
 import okhttp3.Response
 

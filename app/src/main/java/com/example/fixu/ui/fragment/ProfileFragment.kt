@@ -1,4 +1,4 @@
-package com.example.fixu.fragment
+package com.example.fixu.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.fixu.LoginActivity
-import com.example.fixu.SessionManager
+import com.example.fixu.ui.auth.LoginActivity
+import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {

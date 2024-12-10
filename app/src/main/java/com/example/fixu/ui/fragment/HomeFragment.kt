@@ -1,4 +1,4 @@
-package com.example.fixu.fragment
+package com.example.fixu.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fixu.HistoryAdapter
-import com.example.fixu.LoginActivity
+import com.example.fixu.ui.history.HistoryAdapter
+import com.example.fixu.ui.auth.LoginActivity
 import com.example.fixu.R
-import com.example.fixu.SessionManager
+import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentHomeBinding
 import com.example.fixu.response.HistoryDataItem
 import com.example.fixu.response.HistoryResponse
 import com.example.fixu.retrofit.ApiConfig
+import com.example.fixu.ui.history.HistoryFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

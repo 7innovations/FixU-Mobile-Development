@@ -1,6 +1,5 @@
-package com.example.fixu
+package com.example.fixu.ui.auth
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +7,8 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fixu.MainActivity
+import com.example.fixu.database.SessionManager
 import com.example.fixu.database.LoginRequest
 import com.example.fixu.databinding.ActivityLoginBinding
 import com.example.fixu.response.LoginResponse

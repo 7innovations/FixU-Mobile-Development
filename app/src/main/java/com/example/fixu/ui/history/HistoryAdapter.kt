@@ -1,4 +1,4 @@
-package com.example.fixu
+package com.example.fixu.ui.history
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.fixu.ResultActivity
 import com.example.fixu.databinding.HistoryItemBinding
 import com.example.fixu.response.HistoryDataItem
 import java.text.SimpleDateFormat

@@ -1,7 +1,7 @@
 package com.example.fixu.retrofit
 
 import android.content.Context
-import com.example.fixu.SessionManager
+import com.example.fixu.database.SessionManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

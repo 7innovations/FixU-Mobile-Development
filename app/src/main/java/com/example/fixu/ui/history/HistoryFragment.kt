@@ -1,4 +1,4 @@
-package com.example.fixu.fragment
+package com.example.fixu.ui.history
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,12 +12,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.fixu.HistoryAdapter
-import com.example.fixu.LoginActivity
+import com.example.fixu.ui.auth.LoginActivity
 import com.example.fixu.R
-import com.example.fixu.SessionManager
+import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentHistoryBinding
-import com.example.fixu.databinding.FragmentHomeBinding
 import com.example.fixu.response.HistoryDataItem
 import com.example.fixu.response.HistoryResponse
 import com.example.fixu.retrofit.ApiConfig

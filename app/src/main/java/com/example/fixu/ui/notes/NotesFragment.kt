@@ -1,5 +1,6 @@
-package com.example.fixu.notes
+package com.example.fixu.ui.notes
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -11,9 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.fixu.AddNoteActivity
-import com.example.fixu.LoginActivity
-import com.example.fixu.SessionManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.fixu.ui.auth.LoginActivity
+import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentNotesBinding
 import com.example.fixu.response.NoteDataItem
 import com.example.fixu.response.NoteResponse
@@ -30,12 +32,17 @@ class NotesFragment : Fragment() {
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
     private lateinit var sessionManager: SessionManager
-    private lateinit var addNoteLauncher: ActivityResultLauncher<Intent>
+    private lateinit var notesViewModel: NotesViewModel
+    private lateinit var saveNoteLauncher: ActivityResultLauncher<Intent>
+    private lateinit var noteAdapter: NoteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sessionManager = SessionManager(requireContext())
+
+        val factory = NotesViewModelFactory(requireActivity().application)
+        notesViewModel = ViewModelProvider(this, factory).get(NotesViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -45,9 +52,25 @@ class NotesFragment : Fragment() {
         _binding = FragmentNotesBinding.inflate(inflater,container, false)
         val view = binding.root
 
-        addNoteLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
+        noteAdapter = NoteAdapter { note ->
+            openEditNote(note)
+        }
+
+        binding.rvNotesList.adapter = noteAdapter
+
+        notesViewModel.notesLiveData.observe(viewLifecycleOwner) { notes ->
+            setNotesData(notes)
+        }
+
+        notesViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
+
+        saveNoteLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                getNotesData()
+                notesViewModel.refreshNote()
             }
         }
 
@@ -55,77 +78,43 @@ class NotesFragment : Fragment() {
             openAddNote()
         }
 
-        getNotesData()
 
         return view
     }
 
     private fun openAddNote() {
         val intent = Intent(requireActivity(), AddNoteActivity::class.java)
-        addNoteLauncher.launch(intent)
+        saveNoteLauncher.launch(intent)
+    }
+    private fun openEditNote(note: NoteDataItem) {
+        val intent = Intent(requireContext(), AddNoteActivity::class.java).apply {
+            putExtra("TITLE_EXTRA", note.title)
+            putExtra("CONTENT_EXTRA", note.content)
+            putExtra("NOTEID_EXTRA", note.id.toString())
+        }
+        saveNoteLauncher.launch(intent)
     }
 
-    private fun getNotesData() {
-        showLoading(true)
-        val client = ApiConfig.getApiService(requireContext()).getNotes()
-        client.enqueue(object: Callback<NoteResponse> {
-            override fun onResponse(
-                call: Call<NoteResponse>,
-                response: Response<NoteResponse>
-            ) {
-                if (view == null) return
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        setNotesData(responseBody.data)
-                    }
-                } else if (response.code() == 401) {
-                    Toast.makeText(requireContext(), "Unauthorized or token expired", Toast.LENGTH_SHORT).show()
-                    logoutWhenTokenExpired()
-                } else {
-                    Log.d("API Error", "Code: ${response.code()}")
-                    Log.d("API Error", "Code: ${response.message()} \n ${response.errorBody()}")
-                    Toast.makeText(requireContext(), "Failed to load notes data", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<NoteResponse>, t: Throwable) {
-                if (view == null) return
-                showLoading(false)
-                Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-    fun setNotesData(noteData: List<NoteDataItem>) {
+    private fun setNotesData(noteData: List<NoteDataItem>) {
         _binding?.let {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
             val sortedNoteData = noteData.sortedByDescending { item ->
                 runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
             }
 
-            val adapter = NoteAdapter()
-            adapter.submitList(sortedNoteData)
-            binding.rvNotesList.adapter = adapter
+            noteAdapter.submitList(sortedNoteData) {
+                binding.rvNotesList.invalidateItemDecorations()
+                binding.rvNotesList.post {
+                    binding.rvNotesList.scrollToPosition(0)
+                }
+            }
         }
     }
 
-    fun logoutWhenTokenExpired() {
-        sessionManager.clearSession()
-        val intent = Intent(requireActivity(), LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        requireActivity().finish()
-    }
 
     private fun showLoading(isLoading: Boolean) {
         _binding.let {
-            if (isLoading) {
-                binding.notesLoading.visibility = View.VISIBLE
-            } else {
-                binding.notesLoading.visibility = View.GONE
-            }
+            binding.notesLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 

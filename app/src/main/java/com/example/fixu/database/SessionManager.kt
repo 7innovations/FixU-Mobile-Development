@@ -1,4 +1,4 @@
-package com.example.fixu
+package com.example.fixu.database
 
 import android.content.Context
 import android.content.SharedPreferences
