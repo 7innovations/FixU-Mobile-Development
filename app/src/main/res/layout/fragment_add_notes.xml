@@ -53,6 +53,6 @@
         android:contentDescription="@string/save"
         android:src="@drawable/ic_check_circle_24"
         app:backgroundTint="@color/secondaryvariant"
-        app:tint="@color/surfacecolor" />
+        app:tint="@color/white" />
 
 </LinearLayout>

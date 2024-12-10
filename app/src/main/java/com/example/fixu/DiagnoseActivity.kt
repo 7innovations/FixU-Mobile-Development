@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fixu.database.AnswersProfessional
 import com.example.fixu.database.AnswersStudent
@@ -78,6 +79,8 @@ class DiagnoseActivity : AppCompatActivity() {
         val question = questions[currentQuestionIndex]
         binding.tvQuestion.text = question.questionText
 
+        binding.radioGroupAnswers.clearCheck()
+
         when (question.answerType) {
             "radio" -> {
                 binding.viewSwitcher.displayedChild = 0
@@ -95,7 +98,7 @@ class DiagnoseActivity : AppCompatActivity() {
         updateProgressBar()
     }
 
-    private fun saveAnswer() {
+    private fun saveAnswer(): Boolean {
         val question = questions[currentQuestionIndex]
         val answer = when (question.answerType) {
             "radio" -> {
@@ -104,16 +107,29 @@ class DiagnoseActivity : AppCompatActivity() {
                     val radioButton = findViewById<RadioButton>(selectedId)
                     radioButton.text.toString()
                 } else {
-                    ""
+                    null // Tidak ada jawaban
                 }
             }
-            "text" -> binding.editTextAnswer.text.toString()
-            else -> ""
+            "text" -> {
+                val inputText = binding.editTextAnswer.text.toString()
+                if (inputText.isNotEmpty()) inputText else null
+            }
+            else -> null
         }
+
+        if (answer.isNullOrEmpty()) {
+            showAlertDialog("Please answer the question before proceeding.")
+            return false
+        }
+
         answers.add(answer)
+        return true
     }
 
+
     private fun moveToNextQuestion() {
+        if (!saveAnswer()) return // Berhenti jika jawaban tidak valid
+
         if (currentQuestionIndex < questions.size - 1) {
             currentQuestionIndex++
             showQuestion()
@@ -124,6 +140,7 @@ class DiagnoseActivity : AppCompatActivity() {
             submitAnswers()
         }
     }
+
 
     private fun BackToBeforeQuestion() {
         if (currentQuestionIndex > 0) {
@@ -145,6 +162,14 @@ class DiagnoseActivity : AppCompatActivity() {
         }
     }
 
+    private fun showAlertDialog(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Incomplete Answer")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .create()
+            .show()
+    }
 
     private fun updateProgressBar() {
         val progress = ((currentQuestionIndex + 1).toFloat() / questions.size * 100).toInt()

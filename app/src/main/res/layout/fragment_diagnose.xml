@@ -5,21 +5,23 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.DiagnoseFragment"
-    android:background="@color/backgroundcolor">
+    android:background="?attr/colorSurface">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <ImageView
-            android:id="@+id/logofixu"
+        <androidx.appcompat.widget.Toolbar
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fixulogolight"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorSurface"
+            app:logo="@drawable/ic_fixu_logo_light"
+            app:contentInsetStart="0dp"
+            app:titleTextColor="?attr/colorOnPrimaryContainer"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <TextView
             android:id="@+id/tv_question"
@@ -27,54 +29,40 @@
             android:layout_height="wrap_content"
             android:text="@string/status_question"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorOnSurface"
             android:fontFamily="sans-serif-medium"
-            app:layout_constraintTop_toBottomOf="@id/logofixu"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"/>
 
-        <RadioGroup
-            android:id="@+id/rg_options"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_professional"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="@+id/tv_question"
-            app:layout_constraintTop_toBottomOf="@id/tv_question">
-
-            <RadioButton
-                android:id="@+id/rb_professional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Professional"
-                android:textColor="@color/black" />
-
-            <RadioButton
-                android:id="@+id/rb_student"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Student"
-                android:textColor="@color/black" />
-        </RadioGroup>
+            android:backgroundTint="@color/primary"
+            android:text="@string/txtprofessional"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_question" />
 
         <Button
-            android:id="@+id/btnStartdiagnose"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_student"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            android:text="get started"
-            android:textColor="@color/surfacecolor"
+            android:text="@string/txtstudent"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             android:backgroundTint="@color/primary"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginStart="48dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginTop="50dp"
-            app:layout_constraintTop_toBottomOf="@+id/rg_options"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_question"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="16dp"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

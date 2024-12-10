@@ -47,5 +47,8 @@
     <string name="back_home">Back Home</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
+    <string name="txtprofessional">Professional</string>
+    <string name="txtstudent">Student</string>
+    <string name="txtget_started">get started</string>
 
 </resources>

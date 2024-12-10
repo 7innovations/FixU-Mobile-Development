@@ -82,7 +82,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
         android:text="@string/signin"
-        android:textColor="@color/surfacecolor"
+        android:textColor="@color/white"
         android:backgroundTint="@color/primary"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toBottomOf="@+id/password_container"
