@@ -45,7 +45,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="2dp"
             android:textSize="12sp"
-            android:maxLines="4"
+            android:maxLines="6"
             tools:text="@string/note_content" />
 
 

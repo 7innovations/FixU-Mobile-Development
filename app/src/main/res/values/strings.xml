@@ -30,7 +30,6 @@
     <string name="input_confirm_password">Input Confirm Password</string>
     <string name="have_account">Have account?</string>
     <string name="log_in">Log in</string>
-    <string name="bgm">BGM</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="create_your_free_account">Create Your Free Account</string>
     <string name="full_name">Full Name</string>
@@ -49,4 +48,16 @@
     <string name="back">Back</string>
     <string name="delete">Delete</string>
     <string name="save_note">Save Note</string>
+    <string name="user">User</string>
+    <string name="user_gmail_com">user@gmail.com</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="sign_out">Sign out</string>
+    <string name="user_image">user image</string>
+    <string name="change_password">Change Password</string>
+    <string name="reminder_note">Reminder note</string>
+    <string name="switch_reminder">switch reminder</string>
+    <string name="switch_dark_mode">switch dark mode</string>
+    <string name="_20_00">20:00</string>
+    <string name="click_to_the_set_time">Click to the set TIme</string>
 </resources>
