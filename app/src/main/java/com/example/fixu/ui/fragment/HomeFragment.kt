@@ -109,8 +109,6 @@ class HomeFragment : Fragment() {
                    }
                } else if (response.code() == 401) {
                    Toast.makeText(requireContext(), "Unauthorized: Invalid Token", Toast.LENGTH_SHORT).show()
-               } else {
-                   Toast.makeText(requireContext(), "Failed to load history data", Toast.LENGTH_SHORT).show()
                }
             }
 
