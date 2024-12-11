@@ -7,8 +7,17 @@
         <item name="colorPrimaryContainer">@color/almostdark</item>
         <item name="colorOnPrimaryContainer">@color/white</item>
 
+        <item name="colorOnSecondaryFixed">@color/almostwhite</item>
+
     </style>
 
+    <style name="CustomBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemRippleColor">@android:color/transparent</item>
+    </style>
 
+    <style name="TextAppearance.App.RadioButton" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
 </resources>

@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
 
         if (sessionManager.isLoggedIn()) {
-            moveToMain()
+//            moveToMain()
         }
     }
 
@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
                             whatsapp = it.user.whatsapp
                         )
                         Toast.makeText(this@LoginActivity, it.message, Toast.LENGTH_SHORT).show()
-                        moveToMain()
+//                        moveToMain()
                     }
                 }
                 else {
@@ -106,12 +106,12 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private fun moveToMain() {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        finish()
-    }
+//    private fun moveToMain() {
+//        val intent = Intent(this, MainActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        startActivity(intent)
+//        finish()
+//    }
 
     private fun moveToRegister() {
         val intent = Intent(this, RegisterActivity::class.java)

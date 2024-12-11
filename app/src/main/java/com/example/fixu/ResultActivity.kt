@@ -23,13 +23,13 @@ class ResultActivity : AppCompatActivity() {
         binding.btnBackHome.visibility = View.VISIBLE
 
         if (isFromAdapter) {
-            setSupportActionBar(binding.toolbarResult)
+            setSupportActionBar(binding.toolbarMain)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24)
             binding.btnBackHome.visibility = View.GONE
         }
 
-        binding.toolbarResult.setNavigationOnClickListener {
+        binding.toolbarMain.setNavigationOnClickListener {
             finish()
         }
 

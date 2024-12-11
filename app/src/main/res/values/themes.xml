@@ -6,7 +6,6 @@
 
         <item name="colorPrimaryContainer">@color/white</item>
         <item name="colorOnPrimaryContainer">@color/darkrgray</item>
-<<<<<<< HEAD
 
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -14,17 +13,19 @@
         <item name="colorTertiary">@color/secondaryvariant</item>
         <item name="colorOnTertiary">@color/white</item>
 
+        <item name="colorOnSecondaryFixed">@color/gray</item>
 
-
-=======
-        <item name="colorSurface">@color/surfacecolor</item>
->>>>>>> 027c588ecc3661a7c5aaa5debc6aafbd05d8fe84
     </style>
 
     <style name="Theme.FixU" parent="Base.Theme.FixU" />
 
     <style name="CustomBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemRippleColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TextAppearance.App.RadioButton" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

@@ -78,6 +78,7 @@ class DiagnoseActivity : AppCompatActivity() {
         val question = questions[currentQuestionIndex]
         binding.tvQuestion.text = question.questionText
 
+        // Bersihkan pilihan sebelumnya
         binding.radioGroupAnswers.clearCheck()
 
         when (question.answerType) {
@@ -85,7 +86,10 @@ class DiagnoseActivity : AppCompatActivity() {
                 binding.viewSwitcher.displayedChild = 0
                 binding.radioGroupAnswers.removeAllViews()
                 question.options?.forEach { option ->
-                    val radioButton = RadioButton(this).apply { text = option }
+                    val radioButton = RadioButton(this).apply {
+                        text = option
+                        setTextAppearance(R.style.TextAppearance_App_RadioButton) // Gaya sesuai tema
+                    }
                     binding.radioGroupAnswers.addView(radioButton)
                 }
             }
@@ -96,6 +100,7 @@ class DiagnoseActivity : AppCompatActivity() {
         }
         updateProgressBar()
     }
+
 
     private fun saveAnswer(): Boolean {
         val question = questions[currentQuestionIndex]
