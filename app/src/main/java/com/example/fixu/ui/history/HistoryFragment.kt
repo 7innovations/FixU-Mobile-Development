@@ -93,11 +93,6 @@ class HistoryFragment : Fragment() {
                     }
                 } else if (response.code() == 401) {
                     Toast.makeText(requireContext(), "Session Ended: Token Expired", Toast.LENGTH_SHORT).show()
-                    logoutWhenTokenExpired()
-                } else {
-                    Log.d("API Error", "Code: ${response.code()}")
-                    Log.d("API Error", "Code: ${response.message()} \n ${response.errorBody()}")
-                    Toast.makeText(requireContext(), "Failed to load history data", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -129,14 +124,6 @@ class HistoryFragment : Fragment() {
                 binding.rvHistoryList.adapter = adapter
             }
         }
-    }
-
-    fun logoutWhenTokenExpired() {
-        sessionManager.clearSession()
-        val intent = Intent(requireActivity(), LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        requireActivity().finish()
     }
 
     private fun showLoading(isLoading: Boolean) {
