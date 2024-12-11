@@ -2,7 +2,7 @@
 
 FixU is a mobile application aimed at assisting users in detecting and managing their mental health, specifically focusing on depression detection. This application leverages machine learning algorithms, cloud integration, and user-friendly mobile interfaces to deliver a seamless and reliable user experience.
 
-## Features
+## Mobile Features Developed
 
 - **Login with Cloud Authentication**
   - Secure register and login feature using on cloud authentication.
