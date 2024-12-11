@@ -68,14 +68,15 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
 2. Go to Build -> Authentication
 3. Enable Email/Password provider at sign-in method
 4. Make sure your have these dependencies:
+   - Gradle(project)
    ```
-   // at your gradle(project)
    plugins {
     ...
     id("com.google.gms.google-services") version "4.4.2" apply false
    }
-
-   // at your gradle(module)
+   ```
+   - Gradle(module)
+   ```
    plugins {
     ...
     id("com.google.gms.google-services")
