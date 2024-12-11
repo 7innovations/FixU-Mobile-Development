@@ -11,13 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fixu.MainActivity
 import com.example.fixu.database.SessionManager
-import com.example.fixu.database.LoginRequest
 import com.example.fixu.databinding.ActivityLoginBinding
-import com.example.fixu.response.LoginResponse
-import com.example.fixu.retrofit.ApiConfig
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
@@ -25,11 +22,14 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var sessionManager: SessionManager
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = Firebase.auth
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener {
             if (isInputNotEmpty()) {
-                loginAccount()
+                loginWithFirebase()
             } else {
                 binding.emailContainer.error = validateEmail()
                 binding.passwordContainer.error = validatePassword()
@@ -61,57 +61,59 @@ class LoginActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
 
-        if (sessionManager.isLoggedIn()) {
-//            moveToMain()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            moveToMain()
         }
     }
 
-    private fun loginAccount() {
-
+    private fun loginWithFirebase() {
+        email = binding.edtEmail.text.toString().trim()
+        password = binding.edtPassword.text.toString().trim()
         showLoading(true)
 
-        email = binding.edtEmail.getText().toString().trim()
-        password = binding.edtPassword.getText().toString().trim()
-
-        val loginRequest = LoginRequest(email, password)
-
-        val client = ApiConfig.getApiService(this).login(loginRequest)
-        client.enqueue(object: Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
                 showLoading(false)
-                val loginResponseBody = response.body()
-                if (response.isSuccessful && loginResponseBody != null) {
-                    loginResponseBody.let {
-                        sessionManager.saveSession(
-                            token = it.token,
-                            userId = it.user.uid,
-                            email = it.user.email,
-                            name = it.user.fullname,
-                            whatsapp = it.user.whatsapp
-                        )
-                        Toast.makeText(this@LoginActivity, it.message, Toast.LENGTH_SHORT).show()
-//                        moveToMain()
+                if (task.isSuccessful) {
+                    val user = Firebase.auth.currentUser
+                    if (user != null) {
+                        getToken { token ->
+                            sessionManager.saveSession(
+                                token = token,
+                                userId = user.uid,
+                                email = user.email ?: "",
+                                name = user.displayName ?: ""
+                            )
+                            moveToMain()
+                        }
+                    } else {
+                        Toast.makeText(this, "User not found after login", Toast.LENGTH_SHORT).show()
                     }
-                }
-                else {
-                    Toast.makeText(this@LoginActivity, "Wrong email or password", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Wrong email or password", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                showLoading(false)
-                Log.d("Error API", "Error: ${t.message}")
-                Toast.makeText(this@LoginActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
-//    private fun moveToMain() {
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        startActivity(intent)
-//        finish()
-//    }
+    private fun getToken(callback: (String) -> Unit) {
+        FirebaseAuth.getInstance().currentUser?.getIdToken(true)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val idToken = task.result?.token ?: ""
+                callback(idToken)
+            } else {
+                Log.e("Token Firebase", "Failed to get token", task.exception)
+                callback("")
+            }
+        }
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
 
     private fun moveToRegister() {
         val intent = Intent(this, RegisterActivity::class.java)

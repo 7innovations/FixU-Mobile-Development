@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorSurface"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="false"
-    android:paddingBottom="16dp"
     tools:context=".ui.fragment.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -106,6 +104,16 @@
         tools:itemCount="5"/>
 
     <ProgressBar
+        android:id="@+id/quotesLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/ivQuoteImage"
+        app:layout_constraintBottom_toBottomOf="@id/ivQuoteImage"
+        app:layout_constraintStart_toStartOf="@id/ivQuoteImage"
+        app:layout_constraintEnd_toEndOf="@id/ivQuoteImage"
+        android:visibility="gone" />
+
+    <ProgressBar
         android:id="@+id/historyHomeLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,5 +123,32 @@
         app:layout_constraintEnd_toEndOf="@id/rv_history_home"
         android:visibility="gone"/>
 
+    <LinearLayout
+        android:id="@+id/emptyStateContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvHistory"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/emptyStateAnimation"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="16dp"
+            app:lottie_rawRes="@raw/animation_history"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data_history"
+            android:gravity="center"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

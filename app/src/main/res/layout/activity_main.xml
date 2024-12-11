@@ -21,12 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="67dp"
         style="@style/CustomBottomNavigationStyle"
-
         android:background="?attr/colorPrimaryContainer"
         app:itemBackground="@drawable/nav_item_background"
         app:itemIconTint="@drawable/nav_item_icon_color"
         app:itemTextColor="?attr/colorOnPrimaryContainer"
-
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"/>

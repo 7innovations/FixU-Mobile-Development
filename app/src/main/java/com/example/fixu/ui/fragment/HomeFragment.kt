@@ -1,6 +1,5 @@
 package com.example.fixu.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.fixu.ui.history.HistoryAdapter
-import com.example.fixu.ui.auth.LoginActivity
 import com.example.fixu.R
 import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentHomeBinding
 import com.example.fixu.response.HistoryDataItem
 import com.example.fixu.response.HistoryResponse
+import com.example.fixu.response.QuotesResponse
 import com.example.fixu.retrofit.ApiConfig
 import com.example.fixu.ui.history.HistoryFragment
 import retrofit2.Call
@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
         binding.rvHistoryHome.layoutManager = layoutManager
 
         getHistoryData()
+        getQuoteImg()
 
         binding.btnViewMore.setOnClickListener {
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -56,7 +57,38 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
+
         return view
+    }
+
+    private fun getQuoteImg() {
+        showLoadingQuote(true)
+        val client = ApiConfig.getApiService(requireContext()).getQuotes()
+        client.enqueue(object: Callback<QuotesResponse> {
+            override fun onResponse(
+                call: Call<QuotesResponse>,
+                response: Response<QuotesResponse>
+            ) {
+                if (view == null) return
+                showLoadingQuote(false)
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        Glide.with(requireContext())
+                            .load(responseBody.image)
+                            .into(binding.ivQuoteImage)
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to load quotes data", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<QuotesResponse>, t: Throwable) {
+                if (view == null) return
+                showLoadingQuote(false)
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
@@ -76,8 +108,7 @@ class HomeFragment : Fragment() {
                        setHistoryData(responseBody.data)
                    }
                } else if (response.code() == 401) {
-                   Toast.makeText(requireContext(), "Session Ended: Token Expired", Toast.LENGTH_SHORT).show()
-//                   logoutWhenTokenExpired()
+                   Toast.makeText(requireContext(), "Unauthorized: Invalid Token", Toast.LENGTH_SHORT).show()
                } else {
                    Toast.makeText(requireContext(), "Failed to load history data", Toast.LENGTH_SHORT).show()
                }
@@ -93,23 +124,23 @@ class HomeFragment : Fragment() {
 
     fun setHistoryData(historyData: List<HistoryDataItem>) {
         _binding?.let {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val sortedHistoryData = historyData.sortedByDescending { item ->
-                runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
+            if (historyData.isEmpty()) {
+                binding.emptyStateContainer.visibility = View.VISIBLE
+                binding.rvHistoryHome.visibility = View.GONE
+            } else {
+                binding.emptyStateContainer.visibility = View.GONE
+                binding.rvHistoryHome.visibility = View.VISIBLE
+
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                val sortedHistoryData = historyData.sortedByDescending { item ->
+                    runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
+                }
+
+                val adapter = HistoryAdapter()
+                adapter.submitList(sortedHistoryData.take(5))
+                binding.rvHistoryHome.adapter = adapter
             }
-
-            val adapter = HistoryAdapter()
-            adapter.submitList(sortedHistoryData.take(5))
-            binding.rvHistoryHome.adapter = adapter
         }
-    }
-
-    fun logoutWhenTokenExpired() {
-        sessionManager.clearSession()
-        val intent = Intent(requireActivity(), LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        requireActivity().finish()
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -121,6 +152,17 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    private fun showLoadingQuote(isLoading: Boolean) {
+        _binding.let {
+            if (isLoading) {
+                binding.quotesLoading.visibility = View.VISIBLE
+            } else {
+                binding.quotesLoading.visibility = View.GONE
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

@@ -6,21 +6,20 @@ import android.content.SharedPreferences
 class SessionManager(context: Context) {
     private val prefs: SharedPreferences = context.getSharedPreferences("UserSession", Context.MODE_PRIVATE)
 
-    fun saveSession(token: String?, userId: String?, name: String?, email: String?, whatsapp: String?) {
+    fun saveSession(token: String?, userId: String?, name: String?, email: String?) {
         prefs.edit().apply {
             putString(USER_TOKEN, token)
-            putBoolean(IS_LOGGED_IN, true)
+//            putBoolean(IS_LOGGED_IN, true)
             putString(USER_ID, userId)
             putString(USER_EMAIL, email)
             putString(USER_NAME, name)
-            putString(USER_WHATSAPP, whatsapp)
             apply()
         }
     }
 
-    fun isLoggedIn(): Boolean {
-        return prefs.getBoolean(IS_LOGGED_IN, false)
-    }
+//    fun isLoggedIn(): Boolean {
+//        return prefs.getBoolean(IS_LOGGED_IN, false)
+//    }
 
     fun clearSession() {
         prefs.edit().clear().apply()
@@ -42,16 +41,11 @@ class SessionManager(context: Context) {
         return prefs.getString(USER_EMAIL, null)
     }
 
-    fun getUserWhatsapp(): String? {
-        return prefs.getString(USER_WHATSAPP, null)
-    }
-
     companion object {
         const val USER_TOKEN = "user_token"
-        const val IS_LOGGED_IN = "is_logged_in"
+//        const val IS_LOGGED_IN = "is_logged_in"
         const val USER_NAME = "user_name"
         const val USER_ID = "user_id"
         const val USER_EMAIL = "user_email"
-        const val USER_WHATSAPP = "user_whatsapp"
     }
 }

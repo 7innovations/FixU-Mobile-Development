@@ -62,6 +62,7 @@ class HistoryFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_arrow_back_24)
+            setDisplayShowTitleEnabled(false)
         }
 
         toolbar.setNavigationOnClickListener {
@@ -110,14 +111,23 @@ class HistoryFragment : Fragment() {
 
     fun setHistoryData(historyData: List<HistoryDataItem>) {
         _binding?.let {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val sortedHistoryData = historyData.sortedByDescending { item ->
-                runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
-            }
+            if (historyData.isEmpty()) {
+                binding.emptyStateContainer.visibility = View.VISIBLE
+                binding.rvHistoryList.visibility = View.GONE
+            } else {
+                binding.emptyStateContainer.visibility = View.GONE
+                binding.rvHistoryList.visibility = View.VISIBLE
 
-            val adapter = HistoryAdapter()
-            adapter.submitList(sortedHistoryData)
-            binding.rvHistoryList.adapter = adapter
+                val dateFormat =
+                    SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                val sortedHistoryData = historyData.sortedByDescending { item ->
+                    runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
+                }
+
+                val adapter = HistoryAdapter()
+                adapter.submitList(sortedHistoryData)
+                binding.rvHistoryList.adapter = adapter
+            }
         }
     }
 
