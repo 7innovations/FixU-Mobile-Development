@@ -50,8 +50,45 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
    ```
 2. Open the project in Android Studio.
 3. Sync the Gradle files.
-4. Set up the necessary API keys and endpoints in `ApiConfig`.
-5. Run the application on an emulator or a physical device.
+4. Set up your end point services at local.properties
+5. Make a properties named BASE_URL in local.properties
+7. Rebuild your project
+8. Set your API url to match your services at `ApiService` 
+9. Run the application on an emulator or a physical device.
+
+### How to Connect the App to Firebase
+1. Go to [Firebase Console](https://console.firebase.google.com).
+2. **Create a project** and **register** this app to your firebase project
+3. Add all required dependencies and plugin to your gradle files
+4. Download ***google-services.json*** and place it in root **app** folder
+5. `Sync gradle`
+
+### How to enable the Authentication Firebase
+1. Go to your firebase project at Firebase Console.
+2. Go to Build -> Authentication
+3. Enable Email/Password provider at sign-in method
+4. Make sure your have these dependencies:
+   ```
+   // at your gradle(project)
+   plugins {
+    ...
+    id("com.google.gms.google-services") version "4.4.2" apply false
+   }
+
+   // at your gradle(module)
+   plugins {
+    ...
+    id("com.google.gms.google-services")
+   }
+   dependencies {
+    ...
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-auth")
+   }
+   ```
+
+6. `Sync gradle`, if you change your gradle
+
 
 ## How It Works
 
