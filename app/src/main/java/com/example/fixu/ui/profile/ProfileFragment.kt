@@ -21,6 +21,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.fixu.utils.ReminderReceiver
 import java.util.Calendar
 import java.util.Locale
@@ -33,6 +34,7 @@ class ProfileFragment : Fragment() {
     private lateinit var sessionManager: SessionManager
 
     private lateinit var switchReminder: MaterialSwitch
+    private lateinit var switchDarkMode: MaterialSwitch
     private lateinit var tvReminderTime: TextView
     private lateinit var reminderViewModel: ReminderViewModel
 
@@ -54,20 +56,19 @@ class ProfileFragment : Fragment() {
         val view = binding.root
 
         switchReminder = binding.switchReminder
+        switchDarkMode = binding.switchDarkMode
         tvReminderTime = binding.tvReminderTime
+        setupDarkModeSwitch()
 
         reminderViewModel.isReminderEnabled.observe(viewLifecycleOwner) { isEnabled ->
             switchReminder.isChecked = isEnabled
         }
-
         reminderViewModel.reminderTimeString.observe(viewLifecycleOwner) { time ->
             tvReminderTime.text = time
         }
-
         tvReminderTime.setOnClickListener {
             showTimePicker()
         }
-
         switchReminder.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 if (reminderViewModel.reminderTime.value == Pair(-1, -1)) {
@@ -84,6 +85,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
+
         binding.btnLogout.setOnClickListener {
             sessionManager.clearSession()
             moveToSignIn()
@@ -96,6 +98,28 @@ class ProfileFragment : Fragment() {
         binding.tvUserEmail.text = email
 
         return view
+    }
+
+    private fun setupDarkModeSwitch() {
+        val sharedPref = requireContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val isDarkMode = sharedPref.getBoolean("DARK_MODE", false)
+
+        // Set initial switch state
+        switchDarkMode.isChecked = isDarkMode
+        setAppTheme(isDarkMode)
+
+        switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            sharedPref.edit().putBoolean("DARK_MODE", isChecked).apply()
+            setAppTheme(isChecked)
+        }
+    }
+
+    private fun setAppTheme(isDarkMode: Boolean) {
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun moveToSignIn() {
