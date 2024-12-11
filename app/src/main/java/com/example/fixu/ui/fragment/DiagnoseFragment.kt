@@ -36,19 +36,22 @@ class DiagnoseFragment : Fragment() {
         database = AppDatabase.getInstance(requireContext())
         insertInitialQuestions()
 
-        binding.btnStartdiagnose.setOnClickListener {
-            val userStatus = when (binding.rgOptions.checkedRadioButtonId) {
-                R.id.rb_professional -> "Professional"
-                R.id.rb_student -> "Student"
-                else -> "Professional"
-            }
+        binding.btnProfessional.setOnClickListener {
+            navigateToDiagnoseActivity("Professional")
+        }
 
-            val intent = Intent(requireContext(), DiagnoseActivity::class.java).apply {
-                putExtra("USER_STATUS", userStatus)
-            }
-            startActivity(intent)
+        binding.btnStudent.setOnClickListener {
+            navigateToDiagnoseActivity("Student")
         }
     }
+
+    private fun navigateToDiagnoseActivity(userStatus: String) {
+        val intent = Intent(requireContext(), DiagnoseActivity::class.java).apply {
+            putExtra("USER_STATUS", userStatus)
+        }
+        startActivity(intent)
+    }
+
 
     private fun insertInitialQuestions() {
         val questions = listOf(

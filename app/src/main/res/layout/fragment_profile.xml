@@ -1,188 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:background="#F1F8E9">
+    android:background="?attr/colorSurface">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        app:contentInsetStart="0dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Profile picture -->
         <ImageView
-            android:id="@+id/img_profile_picture"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:src="@drawable/ic_profile_picture_placeholder"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="100dp"
-            android:background="@drawable/round_round"
-            android:contentDescription="@string/user_image"/>
-
-        <TextView
-            android:id="@+id/tv_username"
+            android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/img_profile_picture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            android:src="@drawable/ic_fixu_logo_light"
+            android:layout_gravity="start" />
 
-        <!-- User email -->
         <TextView
-            android:id="@+id/tv_user_email"
+            android:id="@+id/tv_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/user_gmail_com"
-            android:textSize="14sp"
-            android:textColor="#888888"
-            app:layout_constraintTop_toBottomOf="@id/tv_username"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="4dp" />
+            android:layout_gravity="end|center_vertical"
+            android:text="@string/profile"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginEnd="32dp" />
+    </androidx.appcompat.widget.Toolbar>
 
-        <!-- Settings Card -->
+    <!-- Profile picture -->
+    <ImageView
+        android:id="@+id/img_profile_picture"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:src="@drawable/ic_profile_picture_placeholder"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/round_round"
+        android:contentDescription="@string/user_image"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/img_profile_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:textColor="?attr/colorOnSurface"/>
+
+    <!-- User email -->
+    <TextView
+        android:id="@+id/tv_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_gmail_com"
+        android:textSize="14sp"
+        android:textColor="?attr/colorOnSecondaryFixed"
+        app:layout_constraintTop_toBottomOf="@id/tv_username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="4dp" />
+
+    <!-- Settings Card -->
+    <LinearLayout
+        android:id="@+id/settings_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_background"
+        android:padding="8dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <!-- Dark Mode Setting -->
         <LinearLayout
-            android:id="@+id/settings_card"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/shape_background"
-            android:padding="8dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_user_email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp">
+            android:id="@+id/btn_dark_mode"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_background_primary"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="15dp">
 
-            <!-- Dark Mode Setting -->
-            <LinearLayout
-                android:id="@+id/btn_dark_mode"
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/shape_background_primary"
-                android:paddingVertical="8dp"
-                android:layout_marginTop="15dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="?attr/colorOnPrimary"
+                android:text="@string/dark_mode"
+                android:layout_marginStart="15dp"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#ffffff"
-                    android:text="@string/dark_mode"
-                    android:layout_marginStart="15dp"
-                    android:textSize="16sp" />
-
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/switch_dark_mode"
-                    android:contentDescription="@string/switch_dark_mode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="8dp"
-                    android:minHeight="50dp"
-                    android:minWidth="60dp"
-                    app:trackTint="@color/switch_track_tint"
-                    android:layout_marginEnd="8dp"/>
-            </LinearLayout>
-
-            <!-- BGM Setting -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/shape_background_primary"
-                android:paddingVertical="8dp"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:gravity="start|center"
-                    android:layout_height="match_parent"
-                    android:textColor="#ffffff"
-                    android:layout_marginStart="15dp"
-                    android:text="@string/reminder_note"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_reminder_time"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="4dp"
-                    android:minHeight="50dp"
-                    android:minWidth="120dp"
-                    android:textSize="12sp"
-                    android:gravity="end|center"
-                    android:textColor="?attr/colorOnPrimary"
-                    android:text="@string/click_to_the_set_time"
-                    />
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/switch_reminder"
-                    android:layout_width="wrap_content"
-                    android:paddingHorizontal="8dp"
-                    android:minHeight="50dp"
-                    android:minWidth="60dp"
-                    android:contentDescription="@string/switch_reminder"
-                    app:trackTint="@color/switch_track_tint"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"/>
-            </LinearLayout>
-
-            <!-- Other Options -->
-            <Button
-                android:id="@+id/btn_change_password"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="#4CAF50"
-                android:text="@string/change_password"
-                android:textColor="@android:color/white"
-                android:gravity="center_vertical" />
-
-            <Button
-                android:id="@+id/btn_edit_profile"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="#4CAF50"
-                android:text="@string/edit_profile"
-                android:textColor="@android:color/white"
-                android:gravity="center_vertical" />
-
-            <Button
-                android:id="@+id/btn_privacy_policy"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="#4CAF50"
-                android:text="@string/privacy_policy"
-                android:textColor="@android:color/white"
-                android:gravity="center_vertical" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_dark_mode"
+                android:contentDescription="@string/switch_dark_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:paddingHorizontal="8dp"
+                android:minHeight="50dp"
+                android:minWidth="60dp"
+                app:trackTint="@color/switch_track_tint"
+                android:layout_marginEnd="8dp"/>
         </LinearLayout>
 
-        <!-- Logout Button -->
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#F44336"
-            android:text="@string/sign_out"
-            android:textColor="@android:color/white"
-            app:layout_constraintTop_toBottomOf="@+id/settings_card"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="15dp" />
+        <!-- BGM Setting -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_background_primary"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="15dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="start|center"
+                android:layout_height="match_parent"
+                android:textColor="?attr/colorOnPrimary"
+                android:layout_marginStart="15dp"
+                android:text="@string/reminder_note"
+                android:layout_marginEnd="130dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_reminder_time"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="4dp"
+                android:minHeight="50dp"
+                android:minWidth="120dp"
+                android:textSize="12sp"
+                android:gravity="end|center"
+                android:textColor="?attr/colorOnPrimary"
+                android:text="@string/click_to_the_set_time"
+                />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_reminder"
+                android:layout_width="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:minHeight="50dp"
+                android:minWidth="60dp"
+                android:contentDescription="@string/switch_reminder"
+                app:trackTint="@color/switch_track_tint"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"/>
+        </LinearLayout>
+
+        <!-- Other Options -->
+        <Button
+            android:id="@+id/btn_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/primary"
+            android:text="@string/change_password"
+            android:textColor="@android:color/white"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btn_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/primary"
+            android:text="@string/edit_profile"
+            android:textColor="@android:color/white"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/btn_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/primary"
+            android:text="@string/privacy_policy"
+            android:textColor="@android:color/white"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <!-- Logout Button -->
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/errorcolor"
+        android:text="@string/sign_out"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/settings_card"
+        app:layout_constraintStart_toStartOf="@+id/settings_card"
+        app:layout_constraintTop_toBottomOf="@+id/settings_card" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 

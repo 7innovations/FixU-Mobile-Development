@@ -5,21 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/backgroundcolor">
+    android:background="?attr/colorSurface">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        app:contentInsetStart="0dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fixu_logo_light"
+            android:layout_gravity="start" />
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:text="@string/diagnose_question"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginEnd="32dp" />
+    </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
-        android:layout_height="8dp"
+        android:layout_height="16dp"
         android:max="100"
         android:progress="0"
+        android:progressBackgroundTint="@color/secondary"
         android:progressTint="@color/primaryvariant"
-        android:backgroundTint="@color/secondary"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <androidx.cardview.widget.CardView
@@ -27,7 +56,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:cardBackgroundColor="@color/surfacecolor"
+        app:cardBackgroundColor="?attr/colorPrimaryContainer"
         app:cardCornerRadius="16dp"
         app:layout_constraintTop_toBottomOf="@id/progress_bar"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,23 +73,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:textColor="@color/black" />
+                android:textColor="?attr/colorOnPrimaryContainer" />
 
-            <!-- ViewSwitcher untuk Tampilan Jawaban -->
             <ViewSwitcher
                 android:id="@+id/view_switcher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
 
-                <!-- RadioGroup untuk Jawaban Pilihan -->
                 <RadioGroup
                     android:id="@+id/radio_group_answers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"/>
 
-                <!-- EditText untuk Jawaban Teks -->
                 <EditText
                     android:id="@+id/edit_text_answer"
                     android:labelFor="@+id/edit_text_answer"
@@ -70,8 +96,8 @@
                     android:autofillHints="answer"
                     android:background="@drawable/edit_text_background"
                     android:padding="12dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/gray" />
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:textColorHint="?attr/colorOnSecondaryFixed" />
             </ViewSwitcher>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -83,7 +109,7 @@
         android:layout_height="wrap_content"
         android:text="@string/back"
         android:backgroundTint="@color/primary"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintTop_toBottomOf="@id/card_question"
@@ -97,7 +123,7 @@
         android:layout_height="wrap_content"
         android:text="@string/next"
         android:backgroundTint="@color/primary"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintTop_toBottomOf="@id/card_question"

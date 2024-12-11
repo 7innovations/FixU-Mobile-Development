@@ -19,10 +19,14 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemIconTint="?attr/colorOnPrimaryContainer"
+        android:layout_height="67dp"
+        style="@style/CustomBottomNavigationStyle"
+
+        android:background="?attr/colorPrimaryContainer"
+        app:itemBackground="@drawable/nav_item_background"
+        app:itemIconTint="@drawable/nav_item_icon_color"
         app:itemTextColor="?attr/colorOnPrimaryContainer"
-        android:background="?attr/colorSurface"
+
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"/>

@@ -43,9 +43,12 @@
     <string name="submit">Submit</string>
     <string name="feedback_result">"The assessment suggests a low likelihood of current depression, but your history of suicidal thoughts and current high work pressure and financial stress warrant attention. It's understandable that these factors impact your sleep and overall well–being.\n To improve, consider prioritizing sleep (aim for 7–8 hours) even if it means adjusting your work schedule slightly. Explore stress-management techniques like mindfulness or exercise, even in short bursts. Finally, reaching out to a therapist or counselor to process past suicidal thoughts could be incredibly beneficial."</string>
     <string name="percent_result">98,89</string>
-    <string name="back_home">Back Home</string>
+    <string name="back_home">Back to Home</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
+    <string name="txtprofessional">Professional</string>
+    <string name="txtstudent">Student</string>
+    <string name="txtget_started">get started</string>
     <string name="delete">Delete</string>
     <string name="save_note">Save Note</string>
     <string name="user">User</string>
@@ -59,5 +62,9 @@
     <string name="switch_reminder">switch reminder</string>
     <string name="switch_dark_mode">switch dark mode</string>
     <string name="_20_00">20:00</string>
-    <string name="click_to_the_set_time">Click to the set TIme</string>
+    <string name="click_to_the_set_time">Click to set the notification</string>
+    <string name="click_to_change_mode">Click to change mode</string>
+    <string name="add_notes">Add Notes</string>
+    <string name="diagnose_question">Diagnose Question</string>
+    <string name="title_diagnose_result">Diagnose Result</string>
 </resources>
