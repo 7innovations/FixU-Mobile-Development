@@ -4,8 +4,8 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
 
 ## Features
 
-- **Login with Google Account**
-  Secure login feature using Google accounts.
+- **Login with Cloud Authentication**
+  - Secure register and login feature using on cloud authentication.
 
 - **Depression Detection System**
   - Users can choose their status as "Professional" or "Student."
@@ -14,28 +14,26 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
   - Data is processed through a machine learning model deployed on the cloud.
   - Users receive detailed diagnostic results based on their inputs.
 
-- **Event Management**
-  - Displays upcoming and finished events in a user-friendly RecyclerView.
-  - Users can mark events as favorites and manage their preferences.
+- **Notes with Reminder**
+  - the user can create a note by pressing a floating action botton.
+  - Display a list of notes that have been created by the user and stored in the on-cloud database.
+  - Enable or disable daily reminders for mental health activities.
+  - Set custom reminder times.
 
 - **Dark Mode Support**
   - Toggle between light and dark themes with a Material Switch.
   - Theme preferences are saved and applied automatically when the app restarts.
 
-- **Reminders**
-  - Enable or disable daily reminders for mental health activities.
-  - Set custom reminder times.
-
 - **Bottom Navigation Bar**
-  - Intuitive navigation for Home, Events, and Profile sections.
+  - Intuitive navigation for Home, Diagnose, notes, and Profile sections.
 
 ## Technical Specifications
 
 - **Languages and Frameworks**: Kotlin, Android Studio, Retrofit, Room Database.
 - **UI Libraries**: Material Design, Glide for image loading.
-- **Theme Management**: Material3 with Base.Theme.DiEvent.
+- **Theme Management**: Material3 with Base.Theme.fixu.
 - **Data Storage**: Room Database (local) and Cloud API for question and answer processing.
-- **Machine Learning**: Depressive state detection using a custom-trained ML model.
+- **Machine Learning**: Depressive state detection using a custom-trained on-cloud ML model.
 - **Cloud Integration**: Cloud-deployed APIs for data processing.
 
 ## Project Structure
@@ -64,9 +62,10 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
 4. The ML model processes the data and returns a diagnosis.
 5. The app displays the results with actionable insights.
 
-### Event Management
-- Fetches events from `https://event-api.dicoding.dev/`.
-- Allows users to favorite events and view details.
+### Notes Flow
+- User adding note by pressing FAB.
+- After user confirming done, data sent to endpoint and get saved on-cloud database.
+- Application GET data from database by endpoint API and showing list to the fragment Notes.
 
 ### Dark Mode
 - User preferences are stored using SharedPreferences.
@@ -74,6 +73,7 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
 
 ## Future Enhancements
 
+- **Consult**: provide suggestion based on diagnosis results to mental health professionals.
 - **Health Tips**: Provide actionable suggestions based on diagnostic results.
 - **Community Integration**: Connect users with mental health professionals.
 - **Multi-Language Support**: Expand the app to support more languages.
@@ -95,10 +95,6 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
    ```
 5. Open a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
-Developed with ❤️ by the FixU team. Together, we strive to improve mental health awareness and accessibility for everyone.
+Developed with ❤️ by the MobileDevelopment team of FixU. Together, we strive to improve mental health awareness and accessibility for everyone.
