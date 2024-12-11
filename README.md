@@ -59,9 +59,9 @@ FixU is a mobile application aimed at assisting users in detecting and managing 
 ### How to Connect the App to Firebase
 1. Go to [Firebase Console](https://console.firebase.google.com).
 2. **Create a project** and **register** this app to your firebase project
-3. Add all required dependencies and plugin to your gradle files
-4. Download ***google-services.json*** and place it in root **app** folder
-5. `Sync gradle`
+3. Download ***google-services.json*** and place it in root **app** folder
+4. Add all required dependencies and plugin to your gradle files
+6. `Sync gradle`
 
 ### How to enable the Authentication Firebase
 1. Go to your firebase project at Firebase Console.
