@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.fixu.ui.history.HistoryAdapter
 import com.example.fixu.ui.auth.LoginActivity
 import com.example.fixu.R
@@ -16,6 +17,7 @@ import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentHomeBinding
 import com.example.fixu.response.HistoryDataItem
 import com.example.fixu.response.HistoryResponse
+import com.example.fixu.response.QuotesResponse
 import com.example.fixu.retrofit.ApiConfig
 import com.example.fixu.ui.history.HistoryFragment
 import retrofit2.Call
@@ -48,6 +50,7 @@ class HomeFragment : Fragment() {
         binding.rvHistoryHome.layoutManager = layoutManager
 
         getHistoryData()
+        getQuoteImg()
 
         binding.btnViewMore.setOnClickListener {
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -57,6 +60,37 @@ class HomeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun getQuoteImg() {
+        showLoadingQuote(true)
+        val client = ApiConfig.getApiService(requireContext()).getQuotes()
+        client.enqueue(object: Callback<QuotesResponse> {
+            override fun onResponse(
+                call: Call<QuotesResponse>,
+                response: Response<QuotesResponse>
+            ) {
+                if (view == null) return
+                showLoadingQuote(false)
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        Log.d("Image Quotes", "URL: ${responseBody.image}")
+                        Glide.with(requireContext())
+                            .load(responseBody.image)
+                            .into(binding.ivQuoteImage)
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to load quotes data", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<QuotesResponse>, t: Throwable) {
+                if (view == null) return
+                showLoadingQuote(false)
+                Toast.makeText(requireContext(), t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
@@ -104,13 +138,13 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun logoutWhenTokenExpired() {
-        sessionManager.clearSession()
-        val intent = Intent(requireActivity(), LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        requireActivity().finish()
-    }
+//    fun logoutWhenTokenExpired() {
+//        sessionManager.clearSession()
+//        val intent = Intent(requireActivity(), LoginActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        startActivity(intent)
+//        requireActivity().finish()
+//    }
 
     private fun showLoading(isLoading: Boolean) {
         _binding.let {
@@ -121,6 +155,17 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    private fun showLoadingQuote(isLoading: Boolean) {
+        _binding.let {
+            if (isLoading) {
+                binding.quotesLoading.visibility = View.VISIBLE
+            } else {
+                binding.quotesLoading.visibility = View.GONE
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

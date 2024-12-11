@@ -79,6 +79,16 @@
         tools:itemCount="5"/>
 
     <ProgressBar
+        android:id="@+id/quotesLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/ivQuoteImage"
+        app:layout_constraintBottom_toBottomOf="@id/ivQuoteImage"
+        app:layout_constraintStart_toStartOf="@id/ivQuoteImage"
+        app:layout_constraintEnd_toEndOf="@id/ivQuoteImage"
+        android:visibility="gone" />
+
+    <ProgressBar
         android:id="@+id/historyHomeLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

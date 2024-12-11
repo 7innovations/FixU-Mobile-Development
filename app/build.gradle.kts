@@ -64,5 +64,6 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation (libs.gson)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.glide)
 
 }

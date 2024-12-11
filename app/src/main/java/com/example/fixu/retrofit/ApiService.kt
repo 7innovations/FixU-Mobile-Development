@@ -13,6 +13,7 @@ import com.example.fixu.response.MLResponse
 import com.example.fixu.response.NoteResponse
 import com.example.fixu.response.PatchNoteResponse
 import com.example.fixu.response.PostNoteResponse
+import com.example.fixu.response.QuotesResponse
 import com.example.fixu.response.SignUpResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -65,4 +66,7 @@ interface ApiService {
     fun deleteNote(
         @Path("id") id: String
     ) : Call<DeleteNoteResponse>
+
+    @GET("/quotes/quotes")
+    fun getQuotes(): Call<QuotesResponse>
 }
