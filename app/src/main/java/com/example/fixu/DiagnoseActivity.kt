@@ -40,14 +40,12 @@ class DiagnoseActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sessionManager = SessionManager(this)
-
         database = AppDatabase.getInstance(this)
 
         userStatus = intent.getStringExtra("USER_STATUS") ?: ""
 
         binding.progressBar.max = 100 // Setting max to 100 to represent percentages
         updateProgressBar()
-
         loadQuestions()
 
         binding.btnNext.setOnClickListener {
@@ -77,8 +75,6 @@ class DiagnoseActivity : AppCompatActivity() {
     private fun showQuestion() {
         val question = questions[currentQuestionIndex]
         binding.tvQuestion.text = question.questionText
-
-        // Bersihkan pilihan sebelumnya
         binding.radioGroupAnswers.clearCheck()
 
         when (question.answerType) {
@@ -104,6 +100,11 @@ class DiagnoseActivity : AppCompatActivity() {
 
     private fun saveAnswer(): Boolean {
         val question = questions[currentQuestionIndex]
+
+        if (answers.size > currentQuestionIndex) {
+            return true // Jawaban sudah ada, abaikan proses selanjutnya
+        }
+
         val answer = when (question.answerType) {
             "radio" -> {
                 val selectedId = binding.radioGroupAnswers.checkedRadioButtonId
@@ -111,7 +112,7 @@ class DiagnoseActivity : AppCompatActivity() {
                     val radioButton = findViewById<RadioButton>(selectedId)
                     radioButton.text.toString()
                 } else {
-                    null // Tidak ada jawaban
+                    null
                 }
             }
             "text" -> {
@@ -126,25 +127,29 @@ class DiagnoseActivity : AppCompatActivity() {
             return false
         }
 
-        answers.add(answer)
+        if (answers.size <= currentQuestionIndex) {
+            answers.add(answer)
+            Log.d("Answer", "Answers: $answers")
+        }
         return true
     }
 
-
     private fun moveToNextQuestion() {
-        if (!saveAnswer()) return // Berhenti jika jawaban tidak valid
-
         if (currentQuestionIndex < questions.size - 1) {
+            if (!saveAnswer()) return
+
             currentQuestionIndex++
             showQuestion()
+
             if (currentQuestionIndex == questions.size - 1) {
                 binding.btnNext.text = getString(R.string.submit)
             }
         } else {
-            submitAnswers()
+            if (saveAnswer()) {
+                submitAnswers()
+            }
         }
     }
-
 
     private fun BackToBeforeQuestion() {
         if (currentQuestionIndex > 0) {
@@ -183,40 +188,36 @@ class DiagnoseActivity : AppCompatActivity() {
     private fun submitAnswers() {
         if (userStatus == "Professional") {
             val answersProfessional = AnswersProfessional(
-                userId = sessionManager.getUserId() ?: "",
-                gender = answers[0],
                 age = answers[1].toIntOrNull() ?: 0,
-                workPressure = answers[2].toIntOrNull() ?: 0,
+                dietaryHabits = answers[5],
+                familyHistory = answers[9],
+                financialStress = answers[8].toIntOrNull() ?: 0,
+                gender = answers[0],
+                suicidalThoughts = answers[6],
                 jobSatisfaction = answers[3].toIntOrNull() ?: 0,
                 sleepDuration = answers[4],
-                dietaryHabits = answers[5],
-                suicidalThoughts = answers[6],
                 workHours = answers[7].toIntOrNull() ?: 0,
-                financialStress = answers[8].toIntOrNull() ?: 0,
-                familyHistory = answers[9]
+                workPressure = answers[2].toIntOrNull() ?: 0
             )
 
-            // Tampilkan data pada Logcat
             Log.d("DiagnoseActivity", "Answers for Professional: $answersProfessional")
 
             sendProfessionalData(answersProfessional)
 
         } else if (userStatus == "Student") {
             val answersStudent = AnswersStudent(
-                userId = sessionManager.getUserId() ?: "",
-                gender = answers[0],
-                age = answers[1].toIntOrNull() ?: 0,
                 academicPressure = answers[2].toIntOrNull() ?: 0,
-                studySatisfaction = answers[3].toIntOrNull() ?: 0,
-                sleepDuration = answers[4],
+                age = answers[1].toIntOrNull() ?: 0,
                 dietaryHabits = answers[5],
-                suicidalThoughts = answers[6],
-                studyHours = answers[7].toIntOrNull() ?: 0,
+                familyHistory = answers[9],
                 financialStress = answers[8].toIntOrNull() ?: 0,
-                familyHistory = answers[9]
+                gender = answers[0],
+                suicidalThoughts = answers[6],
+                sleepDuration = answers[4],
+                studyHours = answers[7].toIntOrNull() ?: 0,
+                studySatisfaction = answers[3].toIntOrNull() ?: 0
             )
 
-            // Tampilkan data pada Logcat
             Log.d("DiagnoseActivity", "Answers for Student: $answersStudent")
             sendStudentData(answersStudent)
         }
