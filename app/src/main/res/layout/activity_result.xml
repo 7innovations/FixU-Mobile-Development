@@ -21,7 +21,7 @@
                 android:id="@+id/iv_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fixu_logo_light"
+                android:src="?attr/toolbarLogo"
                 android:layout_gravity="start" />
 
             <TextView

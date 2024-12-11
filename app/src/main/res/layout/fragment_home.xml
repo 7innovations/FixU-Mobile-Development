@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorSurface"
-        app:logo="@drawable/ic_fixu_logo_light"
+        app:logo="?attr/toolbarLogo"
         app:contentInsetStart="0dp"
         app:titleTextColor="?attr/colorOnPrimaryContainer"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="?attr/colorSurface">
+    android:background="?attr/colorSurface"
+    android:id="@+id/consDiQuest">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
@@ -19,7 +19,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_fixu_logo_light"
+            android:src="?attr/toolbarLogo"
             android:layout_gravity="start" />
 
         <TextView
@@ -34,110 +34,120 @@
             android:layout_marginEnd="32dp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="16dp"
-        android:max="100"
-        android:progress="0"
-        android:progressBackgroundTint="@color/secondary"
-        android:progressTint="@color/primaryvariant"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:padding="16dp"
+        android:layout_marginTop="24dp">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:max="100"
+            android:progress="0"
+            android:progressBackgroundTint="@color/secondary"
+            android:progressTint="@color/primaryvariant"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_question"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="?attr/colorPrimaryContainer"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_question"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="?attr/colorPrimaryContainer"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
-                android:id="@+id/tv_question"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="?attr/colorOnPrimaryContainer" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <ViewSwitcher
-                android:id="@+id/view_switcher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
-
-                <RadioGroup
-                    android:id="@+id/radio_group_answers"
+                <TextView
+                    android:id="@+id/tv_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
+                    android:textSize="16sp"
+                    android:textColor="?attr/colorOnPrimaryContainer" />
 
-                <EditText
-                    android:id="@+id/edit_text_answer"
-                    android:labelFor="@+id/edit_text_answer"
-                    android:inputType="numberDecimal"
+                <ViewSwitcher
+                    android:id="@+id/view_switcher"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints="answer"
-                    android:background="@drawable/edit_text_background"
-                    android:padding="12dp"
-                    android:textColor="?attr/colorOnPrimaryContainer"
-                    android:textColorHint="?attr/colorOnSecondaryFixed" />
-            </ViewSwitcher>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                    android:layout_marginTop="16dp">
 
-    <!-- Tombol Back -->
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:backgroundTint="@color/primary"
-        android:textColor="@color/white"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/card_question"
-        app:layout_constraintStart_toStartOf="@+id/card_question"
-         />
+                    <RadioGroup
+                        android:id="@+id/radio_group_answers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
 
-    <!-- Tombol Next -->
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        android:backgroundTint="@color/primary"
-        android:textColor="@color/white"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/card_question"
-        app:layout_constraintEnd_toEndOf="@+id/card_question" />
+                    <EditText
+                        android:id="@+id/edit_text_answer"
+                        android:labelFor="@+id/edit_text_answer"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="answer"
+                        android:background="@drawable/edit_text_background"
+                        android:padding="12dp"
+                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:textColorHint="?attr/colorOnSecondaryFixed" />
+                </ViewSwitcher>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    <!-- ProgressBar Loading -->
-    <ProgressBar
-        android:id="@+id/result_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone" />
+        <!-- Tombol Back -->
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/card_question"
+            app:layout_constraintStart_toStartOf="@+id/card_question"
+            />
+
+        <!-- Tombol Next -->
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/card_question"
+            app:layout_constraintEnd_toEndOf="@+id/card_question" />
+
+        <!-- ProgressBar Loading -->
+        <ProgressBar
+            android:id="@+id/result_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

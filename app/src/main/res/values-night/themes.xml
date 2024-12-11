@@ -12,6 +12,8 @@
 
         <item name="colorOnSecondaryFixed">@color/almostwhite</item>
 
+        <item name="toolbarLogo">@drawable/ic_fixu_logo_dark</item>
+
     </style>
 
     <style name="CustomBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">

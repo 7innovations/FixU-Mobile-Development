@@ -14,12 +14,6 @@
         />
 
     <item
-        android:id="@+id/consult_menu"
-        android:icon="@drawable/ic_consult"
-        android:title="@string/consult"
-        />
-
-    <item
         android:id="@+id/notes_menu"
         android:icon="@drawable/notes"
         android:title="@string/notes"

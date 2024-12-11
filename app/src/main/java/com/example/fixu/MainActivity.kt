@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.example.fixu.ui.fragment.ConsultFragment
 import com.example.fixu.ui.fragment.DiagnoseFragment
 import com.example.fixu.ui.fragment.HomeFragment
 import com.example.fixu.ui.notes.NotesFragment
@@ -42,9 +41,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.diagnose_menu -> {
                     loadFragment(DiagnoseFragment())
-                    true
-                }R.id.consult_menu -> {
-                    loadFragment(ConsultFragment())
                     true
                 }
                 R.id.notes_menu -> {
