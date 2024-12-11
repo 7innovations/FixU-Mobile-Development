@@ -23,6 +23,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.fixu.utils.ReminderReceiver
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
@@ -87,8 +89,7 @@ class ProfileFragment : Fragment() {
 
 
         binding.btnLogout.setOnClickListener {
-            sessionManager.clearSession()
-            moveToSignIn()
+            logoutAccount()
         }
 
         val userName = sessionManager.getUserName()
@@ -98,6 +99,12 @@ class ProfileFragment : Fragment() {
         binding.tvUserEmail.text = email
 
         return view
+    }
+
+    private fun logoutAccount() {
+        sessionManager.clearSession()
+        Firebase.auth.signOut()
+        moveToSignIn()
     }
 
     private fun setupDarkModeSwitch() {

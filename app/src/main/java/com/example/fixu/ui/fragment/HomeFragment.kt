@@ -1,6 +1,5 @@
 package com.example.fixu.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,7 +10,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.fixu.ui.history.HistoryAdapter
-import com.example.fixu.ui.auth.LoginActivity
 import com.example.fixu.R
 import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentHomeBinding
@@ -59,6 +57,7 @@ class HomeFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
+
         return view
     }
 
@@ -75,7 +74,6 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        Log.d("Image Quotes", "URL: ${responseBody.image}")
                         Glide.with(requireContext())
                             .load(responseBody.image)
                             .into(binding.ivQuoteImage)
@@ -110,8 +108,7 @@ class HomeFragment : Fragment() {
                        setHistoryData(responseBody.data)
                    }
                } else if (response.code() == 401) {
-                   Toast.makeText(requireContext(), "Session Ended: Token Expired", Toast.LENGTH_SHORT).show()
-//                   logoutWhenTokenExpired()
+                   Toast.makeText(requireContext(), "Unauthorized: Invalid Token", Toast.LENGTH_SHORT).show()
                } else {
                    Toast.makeText(requireContext(), "Failed to load history data", Toast.LENGTH_SHORT).show()
                }
@@ -127,24 +124,24 @@ class HomeFragment : Fragment() {
 
     fun setHistoryData(historyData: List<HistoryDataItem>) {
         _binding?.let {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-            val sortedHistoryData = historyData.sortedByDescending { item ->
-                runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
-            }
+            if (historyData.isEmpty()) {
+                binding.emptyStateContainer.visibility = View.VISIBLE
+                binding.rvHistoryHome.visibility = View.GONE
+            } else {
+                binding.emptyStateContainer.visibility = View.GONE
+                binding.rvHistoryHome.visibility = View.VISIBLE
 
-            val adapter = HistoryAdapter()
-            adapter.submitList(sortedHistoryData.take(5))
-            binding.rvHistoryHome.adapter = adapter
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                val sortedHistoryData = historyData.sortedByDescending { item ->
+                    runCatching { dateFormat.parse(item.createdAt) }.getOrNull()
+                }
+
+                val adapter = HistoryAdapter()
+                adapter.submitList(sortedHistoryData.take(5))
+                binding.rvHistoryHome.adapter = adapter
+            }
         }
     }
-
-//    fun logoutWhenTokenExpired() {
-//        sessionManager.clearSession()
-//        val intent = Intent(requireActivity(), LoginActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        startActivity(intent)
-//        requireActivity().finish()
-//    }
 
     private fun showLoading(isLoading: Boolean) {
         _binding.let {

@@ -62,9 +62,12 @@
     <string name="switch_reminder">switch reminder</string>
     <string name="switch_dark_mode">switch dark mode</string>
     <string name="_20_00">20:00</string>
-    <string name="click_to_the_set_time">Click to set the notification</string>
+    <string name="click_to_the_set_time">Click to set the time</string>
     <string name="click_to_change_mode">Click to change mode</string>
     <string name="add_notes">Add Notes</string>
     <string name="diagnose_question">Diagnose Question</string>
     <string name="title_diagnose_result">Diagnose Result</string>
+    <string name="let_s_write_your_feelings_today">Let\'s write your feelings today</string>
+    <string name="no_data_history">Take your first diagnosis now</string>
+    <string name="fixu_logo">Fixu_logo</string>
 </resources>

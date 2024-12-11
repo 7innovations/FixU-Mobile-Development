@@ -49,6 +49,7 @@
             android:layout_marginHorizontal="2dp"
             android:textSize="12sp"
             android:maxLines="6"
+            android:ellipsize="end"
             tools:text="@string/note_content"
             android:textColor="?attr/colorOnPrimaryContainer"/>
 

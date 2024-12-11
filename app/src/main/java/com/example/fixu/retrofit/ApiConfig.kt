@@ -1,6 +1,7 @@
 package com.example.fixu.retrofit
 
 import android.content.Context
+import com.example.fixu.BuildConfig
 import com.example.fixu.database.SessionManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,13 +15,14 @@ class ApiConfig {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
             val sessionManager = SessionManager(context)
+            val baseUrl = BuildConfig.BASE_URL
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .addInterceptor(AuthInterceptor(sessionManager))
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://fixu-api-1045437150026.asia-southeast2.run.app")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
