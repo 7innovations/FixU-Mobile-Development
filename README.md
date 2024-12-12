@@ -14,7 +14,7 @@ FixU is a mobile application designed to help users detect and manage their ment
   - Data is processed using a deep learning model hosted on the cloud.
   - Personalized diagnostic results are generated based on the user’s inputs.
 
-- **Notes with Reminders**
+- **Dairy Notes with Reminders**
   - Users can create personal notes by tapping a floating action button.
   - Created notes are stored in the cloud and can be accessed at any time.
   - Daily reminders can be enabled for mental health activities.
