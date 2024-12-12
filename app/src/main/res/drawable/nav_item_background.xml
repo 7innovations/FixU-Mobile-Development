@@ -1,0 +1,5 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/nav_item_gradient"  android:state_checked="true" />
+    <item android:drawable="@android:color/transparent" />
+
+</selector>

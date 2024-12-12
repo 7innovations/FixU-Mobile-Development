@@ -1,9 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.FixU" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorSurface">@color/backgroundcolor</item>
+        <item name="colorOnSurface">@color/dark</item>
+
+        <item name="colorPrimaryContainer">@color/white</item>
+        <item name="colorOnPrimaryContainer">@color/darkrgray</item>
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorTertiary">@color/secondaryvariant</item>
+        <item name="colorOnTertiary">@color/white</item>
+
+        <item name="colorOnSecondaryFixed">@color/gray</item>
+
+        <item name="toolbarLogo">@drawable/ic_fixu_logo_light</item>
+
+        <item name="android:fontFamily">@font/nunito_regular</item>
+
     </style>
 
     <style name="Theme.FixU" parent="Base.Theme.FixU" />
+
+    <style name="CustomBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemRippleColor">@android:color/transparent</item>
+    </style>
+
+    <style name="TextAppearance.App.RadioButton" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

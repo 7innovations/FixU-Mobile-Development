@@ -1,20 +1,65 @@
 package com.example.fixu
 
+import android.content.Context
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
+import com.example.fixu.ui.fragment.DiagnoseFragment
+import com.example.fixu.ui.fragment.HomeFragment
+import com.example.fixu.ui.notes.NotesFragment
+import com.example.fixu.ui.profile.ProfileFragment
+import com.example.fixu.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val isDarkMode = sharedPref.getBoolean("DARK_MODE", false)
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        if (savedInstanceState == null) {
+            loadFragment(HomeFragment())
+        }
+
+        binding.bottomNav.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home_menu -> {
+                    loadFragment(HomeFragment())
+                    true
+                }
+                R.id.diagnose_menu -> {
+                    loadFragment(DiagnoseFragment())
+                    true
+                }
+                R.id.notes_menu -> {
+                    loadFragment(NotesFragment())
+                    true
+                }
+                R.id.profile_menu -> {
+                    loadFragment(ProfileFragment())
+                    true
+                }
+                else -> false
+            }
         }
     }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+    }
+
 }
