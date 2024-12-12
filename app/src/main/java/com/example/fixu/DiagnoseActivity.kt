@@ -230,10 +230,10 @@ class DiagnoseActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<MLResponse> {
             override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
-                showLoading(false)
                 val apiResponse = response.body()
                 if (response.isSuccessful && apiResponse != null) {
 
+                    showLoading(false)
                     val apiResponseObject = apiResponse.result.firstOrNull()
 
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
@@ -244,6 +244,7 @@ class DiagnoseActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
+                    showLoading(false)
                     if (response.code() == 401){
                         Toast.makeText(this@DiagnoseActivity, "Token Expired", Toast.LENGTH_SHORT).show()
 
@@ -268,10 +269,9 @@ class DiagnoseActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<MLResponse> {
             override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
-                showLoading(false)
                 val apiResponse = response.body()
                 if (response.isSuccessful && apiResponse != null) {
-
+                    showLoading(false)
                     val apiResponseObject = apiResponse.result.firstOrNull()
 
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
@@ -282,6 +282,7 @@ class DiagnoseActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
+                    showLoading(false)
                     if (response.code() == 401){
                         Toast.makeText(this@DiagnoseActivity, "Token Expired", Toast.LENGTH_SHORT).show()
 
