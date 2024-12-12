@@ -44,30 +44,30 @@ FixU is a mobile application designed to help users detect and manage their ment
 
 ## Installation
 
-1. Clone the repository:
+1. Clone the repository
    ```bash
    git clone https://github.com/your-organization/fixu.git
    ```
-2. Open the project in Android Studio.
-3. Sync the Gradle files.
-4. Set up your endpoint services in `local.properties`.
-5. Add a property named `BASE_URL` in `local.properties`.
-6. Rebuild the project.
-7. Set the correct API URL in `ApiService`.
-8. Run the application on an emulator or a physical device.
+2. Open the project in Android Studio
+3. Sync the Gradle files
+4. Set up your endpoint services in `local.properties`
+5. Add a property named `BASE_URL` in `local.properties`
+6. Rebuild the project
+7. Set the correct API URL in `ApiService`
+8. Run the application on an emulator or a physical device
 
 ### How to Connect the App to Firebase
-1. Go to [Firebase Console](https://console.firebase.google.com).
-2. **Create a project** and **register** the app with your Firebase project.
-3. Download `google-services.json` and place it in the root **app** folder.
-4. Add the required dependencies and plugins to your Gradle files.
-5. **Sync Gradle**.
+1. Go to [Firebase Console](https://console.firebase.google.com)
+2. **Create a project** and **register** the app with your Firebase project
+3. Download `google-services.json` and place it in the root **app** folder
+4. Add the required dependencies and plugins to your Gradle files
+5. **Sync Gradle**
 
 ### How to Enable Firebase Authentication
-1. Go to your Firebase project in the Firebase Console.
-2. Navigate to **Build -> Authentication**.
-3. Enable the **Email/Password provider** under the sign-in method.
-4. Make sure your `build.gradle` files have these dependencies:
+1. Go to your Firebase project in the Firebase Console
+2. Navigate to **Build -> Authentication**
+3. Enable the **Email/Password provider** under the sign-in method
+4. Make sure your `build.gradle` files have these dependencies
    - **Gradle (project)**
    ```gradle
    plugins {
