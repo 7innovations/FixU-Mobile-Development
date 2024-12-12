@@ -25,7 +25,7 @@ FixU is a mobile application designed to help users detect and manage their ment
   - User preferences are saved, and the theme is applied automatically when the app restarts.
 
 - **Bottom Navigation Bar**
-  - Simple and intuitive navigation with sections for Home, Diagnose, Notes, and Profile.
+  - Simple and intuitive navigation with sections for Home, Diagnose, Diary Notes, and Profile.
 
 ## Technical Specifications
 
