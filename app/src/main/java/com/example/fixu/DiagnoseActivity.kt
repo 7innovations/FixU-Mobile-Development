@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -33,6 +34,7 @@ class DiagnoseActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
     private var answers = mutableListOf<String>()
     private var userStatus = ""
+    private lateinit var btnNext: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,8 @@ class DiagnoseActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
         database = AppDatabase.getInstance(this)
+
+        btnNext = binding.btnNext
 
         userStatus = intent.getStringExtra("USER_STATUS") ?: ""
 
@@ -226,14 +230,13 @@ class DiagnoseActivity : AppCompatActivity() {
     private fun sendProfessionalData(answers: AnswersProfessional) {
         val apiService = ApiConfig.getApiService(this)
         val call = apiService.postProfessionalAnswers(answers)
+        btnNext.isEnabled = false
         showLoading(true)
 
         call.enqueue(object : Callback<MLResponse> {
             override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
                 val apiResponse = response.body()
                 if (response.isSuccessful && apiResponse != null) {
-
-                    showLoading(false)
                     val apiResponseObject = apiResponse.result.firstOrNull()
 
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
@@ -241,9 +244,11 @@ class DiagnoseActivity : AppCompatActivity() {
                     intent.putExtra(ResultActivity.EXTRA_PROBABILITY, apiResponseObject?.probability.toString())
                     intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponseObject?.result)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    showLoading(false)
                     startActivity(intent)
                     finish()
                 } else {
+                    btnNext.isEnabled = true
                     showLoading(false)
                     if (response.code() == 401){
                         Toast.makeText(this@DiagnoseActivity, "Token Expired", Toast.LENGTH_SHORT).show()
@@ -255,6 +260,7 @@ class DiagnoseActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<MLResponse>, t: Throwable) {
+                btnNext.isEnabled = true
                 showLoading(false)
                 Log.d("Error API", "Failed ${t.message}")
                 Toast.makeText(this@DiagnoseActivity, t.message, Toast.LENGTH_SHORT).show()
@@ -265,13 +271,13 @@ class DiagnoseActivity : AppCompatActivity() {
     private fun sendStudentData(answers: AnswersStudent) {
         val apiService = ApiConfig.getApiService(this)
         val call = apiService.postStudentAnswers(answers)
+        btnNext.isEnabled = false
         showLoading(true)
 
         call.enqueue(object : Callback<MLResponse> {
             override fun onResponse(call: Call<MLResponse>, response: Response<MLResponse>) {
                 val apiResponse = response.body()
                 if (response.isSuccessful && apiResponse != null) {
-                    showLoading(false)
                     val apiResponseObject = apiResponse.result.firstOrNull()
 
                     val intent = Intent(this@DiagnoseActivity, ResultActivity::class.java)
@@ -280,8 +286,10 @@ class DiagnoseActivity : AppCompatActivity() {
                     intent.putExtra(ResultActivity.EXTRA_RESULT, apiResponseObject?.result)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+                    showLoading(false)
                     finish()
                 } else {
+                    btnNext.isEnabled = true
                     showLoading(false)
                     if (response.code() == 401){
                         Toast.makeText(this@DiagnoseActivity, "Token Expired", Toast.LENGTH_SHORT).show()
@@ -293,6 +301,7 @@ class DiagnoseActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<MLResponse>, t: Throwable) {
+                btnNext.isEnabled = true
                 showLoading(false)
                 Toast.makeText(this@DiagnoseActivity, t.message, Toast.LENGTH_SHORT).show()
             }
