@@ -35,9 +35,9 @@
             card_view:layout_constraintStart_toEndOf="@id/tv_date_history"
             card_view:layout_constraintEnd_toStartOf="@id/btn_history_view_more"
             android:layout_marginHorizontal="2dp"
-            android:textStyle="bold"
             android:textAlignment="center"
             tools:text="@string/diagnose_result"
+            android:fontFamily="@font/nunito_extrabold"
             android:textColor="?attr/colorOnPrimaryContainer"/>
 
         <Button

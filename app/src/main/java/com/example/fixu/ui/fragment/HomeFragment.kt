@@ -1,15 +1,15 @@
 package com.example.fixu.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.fixu.ui.history.HistoryAdapter
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.fixu.R
 import com.example.fixu.database.SessionManager
 import com.example.fixu.databinding.FragmentHomeBinding
@@ -17,6 +17,7 @@ import com.example.fixu.response.HistoryDataItem
 import com.example.fixu.response.HistoryResponse
 import com.example.fixu.response.QuotesResponse
 import com.example.fixu.retrofit.ApiConfig
+import com.example.fixu.ui.history.HistoryAdapter
 import com.example.fixu.ui.history.HistoryFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -76,6 +77,7 @@ class HomeFragment : Fragment() {
                     if (responseBody != null) {
                         Glide.with(requireContext())
                             .load(responseBody.image)
+                            .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
                             .into(binding.ivQuoteImage)
                     }
                 } else {

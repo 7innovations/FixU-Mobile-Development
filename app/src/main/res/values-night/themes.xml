@@ -14,6 +14,8 @@
 
         <item name="toolbarLogo">@drawable/ic_fixu_logo_dark</item>
 
+        <item name="android:fontFamily">@font/nunito_regular</item>
+
     </style>
 
     <style name="CustomBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">

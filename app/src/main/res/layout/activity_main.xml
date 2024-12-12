@@ -27,6 +27,8 @@
         app:itemTextColor="?attr/colorOnPrimaryContainer"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
+        app:itemTextAppearanceActive="@font/nunito_extrabold"
+        app:itemTextAppearanceInactive="@font/nunito_light"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

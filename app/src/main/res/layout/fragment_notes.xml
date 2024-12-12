@@ -30,7 +30,6 @@
             android:text="@string/notes"
             android:textColor="?attr/colorOnPrimaryContainer"
             android:textSize="18sp"
-            android:fontFamily="sans-serif-medium"
             android:layout_marginEnd="32dp" />
     </androidx.appcompat.widget.Toolbar>
 

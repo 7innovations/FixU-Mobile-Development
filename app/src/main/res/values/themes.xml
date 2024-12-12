@@ -17,6 +17,8 @@
 
         <item name="toolbarLogo">@drawable/ic_fixu_logo_light</item>
 
+        <item name="android:fontFamily">@font/nunito_regular</item>
+
     </style>
 
     <style name="Theme.FixU" parent="Base.Theme.FixU" />
