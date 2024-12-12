@@ -99,7 +99,7 @@ FixU is a mobile application designed to help users detect and manage their ment
 4. The machine learning model processes the data and returns a diagnosis.
 5. The app displays the diagnostic results with actionable insights.
 
-### Notes Flow
+### Diary Notes Flow
 - Users can add notes by tapping the floating action button (FAB).
 - Upon confirmation, the data is sent to the backend API and saved in the cloud database.
 - The application retrieves and displays the list of notes stored in the cloud.
