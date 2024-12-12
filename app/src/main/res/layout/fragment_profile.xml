@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="?attr/colorSurface">
 
     <androidx.appcompat.widget.Toolbar
@@ -19,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="?attr/toolbarLogo"
+            android:contentDescription="@string/fixu_logo"
             android:layout_gravity="start" />
 
         <TextView
@@ -210,13 +215,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/errorcolor"
         android:text="@string/sign_out"
         android:fontFamily="@font/nunito_bold"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/settings_card"
         app:layout_constraintStart_toStartOf="@+id/settings_card"
-        app:layout_constraintTop_toBottomOf="@+id/settings_card" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_card"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+</ScrollView>
