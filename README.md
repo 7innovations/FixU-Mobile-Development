@@ -65,7 +65,7 @@ FixU is a mobile application designed to help users detect and manage their ment
 
 ### How to Enable Firebase Authentication
 1. Go to your Firebase project in the Firebase Console.
-2. Navigate to **Build > Authentication**.
+2. Navigate to **Build -> Authentication**.
 3. Enable the **Email/Password provider** under the sign-in method.
 4. Make sure your `build.gradle` files have these dependencies:
    - **Gradle (project)**
