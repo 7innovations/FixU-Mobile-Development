@@ -34,8 +34,8 @@ class ReminderReceiver : BroadcastReceiver() {
         notificationManager.createNotificationChannel(channel)
 
         val notification = NotificationCompat.Builder(context, channelId)
-            .setContentTitle("Daily Note")
-            .setContentText("How do you feel today, let's note it down in your daily note.")
+            .setContentTitle("Diary Daily Reminder")
+            .setContentText("How you feel today? let's note it down in your diary note!")
             .setSmallIcon(R.drawable.ic_fixu_logo_light)
             .build()
 

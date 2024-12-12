@@ -16,7 +16,6 @@
     <string name="diagnose">Diagnose</string>
     <string name="home">Home</string>
     <string name="consultation">Consultation</string>
-    <string name="notes">Notes</string>
     <string name="profile">Profile</string>
     <string name="consult">Consult</string>
     <string name="signin">Sign in</string>
@@ -58,7 +57,6 @@
     <string name="sign_out">Sign out</string>
     <string name="user_image">user image</string>
     <string name="change_password">Change Password</string>
-    <string name="reminder_note">Reminder note</string>
     <string name="switch_reminder">switch reminder</string>
     <string name="switch_dark_mode">switch dark mode</string>
     <string name="_20_00">20:00</string>
@@ -70,4 +68,6 @@
     <string name="let_s_write_your_feelings_today">Let\'s write your feelings today</string>
     <string name="no_data_history">Take your first diagnosis now</string>
     <string name="fixu_logo">Fixu_logo</string>
+    <string name="diary">Diary</string>
+    <string name="diary_reminder">Diary Reminder</string>
 </resources>

@@ -136,7 +136,7 @@
                 android:layout_height="match_parent"
                 android:textColor="?attr/colorOnPrimary"
                 android:layout_marginStart="15dp"
-                android:text="@string/reminder_note"
+                android:text="@string/diary_reminder"
                 android:fontFamily="@font/nunito_bold"
                 android:layout_marginEnd="15dp"
                 android:minWidth="120dp"
