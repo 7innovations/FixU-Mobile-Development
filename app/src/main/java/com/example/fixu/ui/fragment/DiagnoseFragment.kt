@@ -69,35 +69,31 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Professional",
-                questionText = "How would you rate the work pressure you experience?",
+                questionText = "How would you rate the work pressure you experience?\n1 = Minimal stress, easy to manage!\n2 = Some stress, but manageable\n3 = Just average i guess\n4 = It is frequently punching me\n5 = Constantly overwhelmed, im cooked!",
                 answerType = "radio",
-                options = listOf("1 = Minimal stress, easy to manage", "2 = Some stress, but manageable",
-                    "3 = Average level of work stress", "4 = Frequently feel stressed at work",
-                    "5 = Constantly overwhelmed by work pressure")
+                options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Professional",
-                questionText = "How satisfied are you with your current job?",
+                questionText = "How satisfied are you with your current job?\n1: I want to quit.\n2: I kinda hate this job :(\n3: It is a love-hate relationship with it\n4: I kinda love this job\n5: I love my job to the bone",
                 answerType = "radio",
-                options = listOf("1 = Not happy at all with the job", "2 = Unhappy with most aspects of the job",
-                    "3 = Neither satisfied nor dissatisfied", "4 = Happy with most aspects of the job",
-                    "5 = Completely happy with the job")
+                options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Professional",
-                questionText = "How many hours of sleep do you get on average per night?",
+                questionText = "How many hours of sleep do you normally get each night?",
                 answerType = "radio",
                 options = listOf("Less than 5 hours", "5-6 hours", "7-8 hours", " More than 8 hours")
             ),
             Question(
                 status = "Professional",
-                questionText = "How would you describe your dietary habits",
+                questionText = "How would you describe your dietary habits?",
                 answerType = "radio",
                 options = listOf("Healthy", "Moderate", "Unhealthy")
             ),
             Question(
                 status = "Professional",
-                questionText = "Have you ever had suicidal thoughts?",
+                questionText = "Have you ever had self-harm or suicidal thoughts?",
                 answerType = "radio",
                 options = listOf("Yes", "No")
             ),
@@ -109,11 +105,9 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Professional",
-                questionText = "How much financial stress are you currently experiencing?",
+                questionText = "How much financial stress are you currently experiencing?\n1. Im doing well, zero stress on that front\n2. I rarely struggle with it\n3. Its all about up and down\n4. Frequently feel that financial stress\n5. Always stressful with finance :(",
                 answerType = "radio",
-                options = listOf("1 = Financially secure, no stress", "2 = Rarely worried about finances",
-                    "3 = Occasionally worried about finances", "4 = Frequently stressed about finances",
-                    "5 = Constantly stressed about financial matters")
+                options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Professional",
@@ -135,23 +129,29 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Student",
-                questionText = "How would you rate the academic pressure you experience?",
+                questionText = "How would you rate the academic pressure you experience?\n" +
+                        "1 = Minimal pressure, easy to manage!\n" +
+                        "2 = Some pressure, but manageable\n" +
+                        "3 = Just average level i think\n" +
+                        "4 = It is frequently punching me\n" +
+                        "5 = Constantly overwhelmed, im cooked!",
                 answerType = "radio",
-                options = listOf("1 = Minimal pressure, easy to manage", "2 = Some pressure, but manageable",
-                    "3 = Average level of academic pressure", "4 = Frequently feel pressured by academic demands",
-                    "5 = Constantly overwhelmed by academic pressure")
+                options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Student",
-                questionText = "How satisfied are you with your current academic progress?",
+                questionText = "How satisfied are you with your current academic progress?\n" +
+                        "1: I want to drop out.\n" +
+                        "2: I kinda hate my studies :(\n" +
+                        "3: It is a love-hate relationship with studies\n" +
+                        "4: I kinda love my studies\n" +
+                        "5: I love it to the bone",
                 answerType = "radio",
-                options = listOf("1 = Not satisfied at all with my studies", "2 = Dissatisfied with most aspects of my studies",
-                    "3 = Neither satisfied nor dissatisfied", "4 = Satisfied with most aspects of my studies",
-                    "5 = Completely satisfied with my studies")
+                options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Student",
-                questionText = "How many hours of sleep do you get on average per night?",
+                questionText = "How many hours of sleep do you normally get each night?",
                 answerType = "radio",
                 options = listOf("Less than 5 hours", "5-6 hours", "7-8 hours", " More than 8 hours")
             ),
@@ -163,7 +163,7 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Student",
-                questionText = "Have you ever had suicidal thoughts?",
+                questionText = "Have you ever had self-harm or suicidal thoughts?",
                 answerType = "radio",
                 options = listOf("Yes", "No")
             ),
@@ -175,11 +175,14 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Student",
-                questionText = "How much financial stress are you currently experiencing?",
+                questionText = "How much financial stress are you currently experiencing?\n" +
+                        "1. Im doing well, zero stress on that front\n" +
+                        "2. I rarely struggle with it\n" +
+                        "3. Its all about up and down\n" +
+                        "4. Frequently feel that financial stress\n" +
+                        "5. Always stressful with my financial :(",
                 answerType = "radio",
-                options = listOf("1 = Financially secure, no stress", "2 = Rarely worried about finances",
-                    "3 = Occasionally worried about finances", "4 = Frequently stressed about finances",
-                    "5 = Constantly stressed about financial matters")
+                options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Student",

@@ -98,6 +98,10 @@ class ProfileFragment : Fragment() {
         binding.tvUsername.text = userName
         binding.tvUserEmail.text = email
 
+        binding.btnPrivacyPolicy.setOnClickListener {
+            PrivacyPolicyDialog().show(requireContext())
+        }
+
         return view
     }
 

@@ -4,19 +4,22 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.fixu.ui.fragment.DiagnoseFragment
 import com.example.fixu.ui.fragment.HomeFragment
 import com.example.fixu.ui.notes.NotesFragment
 import com.example.fixu.ui.profile.ProfileFragment
 import com.example.fixu.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         val isDarkMode = sharedPref.getBoolean("DARK_MODE", false)
         if (isDarkMode) {
@@ -61,5 +64,4 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
-
 }
