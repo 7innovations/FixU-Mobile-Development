@@ -33,7 +33,7 @@ FixU is a mobile application designed to help users detect and manage their ment
 - **UI Libraries**: Material Design, Glide (image loading).
 - **Theme Management**: Material3 with custom Base.Theme.fixu.
 - **Data Storage**: Room Database (local) and Cloud API for question-answer processing.
-- **Machine Learning**: Depression detection using a custom-trained on-cloud ML model.
+- **Deep Learning**: Depression detection using a custom-trained on-cloud DL model.
 - **Cloud Integration**: APIs deployed in the cloud for backend processing.
 
 ## Project Structure
