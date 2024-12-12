@@ -63,19 +63,19 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Professional",
-                questionText = "How old are you? (e.g., 8)\n*type numbers only*",
+                questionText = "How old are you?",
                 answerType = "text",
                 options = null
             ),
             Question(
                 status = "Professional",
-                questionText = "How would you rate your work-related stress on a scale of 1 (low) to 5 (high)?\n1: work was easy!\n2: work was kinda fine\n3: one day fun, one day stressed\n4: it's a big pressure for me\n5: it's killing me",
+                questionText = "How would you rate your work-related stress on a scale of 1 to 5?\n1: my job easy peasy!\n2: my job was kinda fine\n3: one day fun, others stressed\n4: it's a big pressure for me\n5: it's killing me!",
                 answerType = "radio",
                 options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Professional",
-                questionText = "How satisfied are you with your job, from 1 (not satisfied) to 5 (very satisfied)?\n1: i wanna quit.\n2: i kinda hate this job\n3: it's a love-hate relationship with this job\n4: i kinda love this job\n5: i love my job till my bone",
+                questionText = "How satisfied are you with your job, from 1 to 5?\n1: i wanna quit.\n2: i kinda hate this job :(\n3: it's a love-hate relationship with it\n4: i kinda love this job\n5: i love my job till my bone",
                 answerType = "radio",
                 options = listOf("1", "2", "3", "4", "5")
             ),
@@ -99,13 +99,13 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Professional",
-                questionText = "On average, how many hours do you work each day? (e.g., 8)\n*type numbers only*",
+                questionText = "On average, how many hours do you work each day?",
                 answerType = "text",
                 options = null
             ),
             Question(
                 status = "Professional",
-                questionText = "How would you rate your financial stress level on a scale of 1 (low) to 5 (high)?",
+                questionText = "How would you rate your financial stress level on a scale of 1 to 5?\n1. Im Rich.\n2. I rarely struggle with it\n3. its all about up and down\n4. i mostly feel that financial stress\n5. im stressful cz im broke",
                 answerType = "radio",
                 options = listOf("1", "2", "3", "4", "5")
             ),
@@ -123,20 +123,24 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Student",
-                questionText = "How old are you? (e.g., 8)\n" +
-                        "*type numbers only*",
+                questionText = "How old are you?",
                 answerType = "text",
                 options = null
             ),
             Question(
                 status = "Student",
-                questionText = "How would you rate your academic pressure on a scale of 1 (low) to 5 (high)?",
+                questionText = "How would you rate your academic pressure on a scale of 1 to 5?\n" +
+                        "1: my education easy peasy!\n" +
+                        "2: my education was kinda fine\n" +
+                        "3: one day fun, others stressed\n" +
+                        "4: it's a big pressure for me\n" +
+                        "5: it's killing me!",
                 answerType = "radio",
                 options = listOf("1", "2", "3", "4", "5")
             ),
             Question(
                 status = "Student",
-                questionText = "How satisfied are you with your studies, from 1 (not satisfied) to 5 (very satisfied)?",
+                questionText = "How satisfied are you with your studies, from 1 to 5?\n1: i wanna drop out.\n2: i kinda hate this education :(\n3: it's a love-hate relationship with it\n4: i kinda love this education\n5: i love this education till my DNA",
                 answerType = "radio",
                 options = listOf("1", "2", "3", "4", "5")
             ),
@@ -160,14 +164,13 @@ class DiagnoseFragment : Fragment() {
             ),
             Question(
                 status = "Student",
-                questionText = "On average, how many hours do you study each day? (e.g., 8)\n" +
-                        "*type numbers only*",
+                questionText = "On average, how many hours do you study each day?",
                 answerType = "text",
                 options = null
             ),
             Question(
                 status = "Student",
-                questionText = "How would you rate your financial stress level on a scale of 1 (low) to 5 (high)?",
+                questionText = "How would you rate your financial stress level on a scale of 1 to 5?\n1. Im Rich.\n2. I rarely struggle with it\n3. its all about up and down\n4. i mostly feel that financial stress\n5. im stressful cz im broke",
                 answerType = "radio",
                 options = listOf("1", "2", "3", "4", "5")
             ),
