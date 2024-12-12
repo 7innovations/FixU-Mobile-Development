@@ -66,6 +66,11 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getQuoteImg()
+    }
+
     private fun getQuoteImg() {
         showLoadingQuote(true)
         val client = ApiConfig.getApiService(requireContext()).getQuotes()
