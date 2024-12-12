@@ -68,14 +68,14 @@ FixU is a mobile application designed to help users detect and manage their ment
 2. Navigate to **Build -> Authentication**
 3. Enable the **Email/Password provider** under the sign-in method
 4. Make sure your `build.gradle` files have these dependencies
-   - **Gradle (project)**
+   - **Gradle Project**
    ```gradle
    plugins {
      ...
      id("com.google.gms.google-services") version "4.4.2" apply false
    }
    ```
-   - **Gradle (module)**
+   - **Gradle Module**
    ```gradle
    plugins {
      ...
