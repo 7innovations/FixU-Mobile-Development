@@ -1,6 +1,6 @@
 # FixU Mobile Development
 
-FixU is a mobile application designed to help users detect and manage their mental health, with a specific focus on depression detection. The app utilizes machine learning algorithms, cloud integration, and an intuitive mobile interface to provide a seamless, user-friendly, and reliable experience.
+FixU is a mobile application designed to help users detect and manage their mental health, with a specific focus on depression detection. The app utilizes deep learning algorithms, cloud integration, and an intuitive mobile interface to provide a seamless, user-friendly, and reliable experience.
 
 ## Mobile Features Developed
 
