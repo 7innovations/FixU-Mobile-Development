@@ -39,7 +39,7 @@ FixU is a mobile application designed to help users detect and manage their ment
 ## Project Structure
 
 - **Mobile Development**: UI/UX design and integration with APIs.
-- **Machine Learning**: Creation and evaluation of the depression detection model.
+- **Deep Learning**: Creation and evaluation of the depression detection model.
 - **Cloud Computing**: API development and deployment for backend data processing.
 
 ## Installation
