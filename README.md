@@ -46,7 +46,7 @@ FixU is a mobile application designed to help users detect and manage their ment
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/your-organization/fixu.git
+   git clone https://github.com/7innovations/FixU-Mobile-Development
    ```
 2. Open the project in Android Studio
 3. Sync the Gradle files
