@@ -96,7 +96,7 @@ FixU is a mobile application designed to help users detect and manage their ment
 1. The user selects their status (Professional or Student).
 2. A series of 10 tailored questions are presented based on the selected status.
 3. The answers are compiled into an array and sent to the cloud.
-4. The machine learning model processes the data and returns a diagnosis.
+4. The deep learning model processes the data and returns a diagnosis.
 5. The app displays the diagnostic results with actionable insights.
 
 ### Diary Notes Flow
