@@ -1,6 +1,6 @@
 # FixU Mobile Development
 
-FixU is a mobile application designed to help users detect and manage their mental health, with a specific focus on depression detection. The app utilizes deep learning algorithms, cloud integration, and an intuitive mobile interface to provide a seamless, user-friendly, and reliable experience.
+FixU is a mobile application designed to help users detect and manage their mental health, with a specific focus on depression detection. The app utilizes artificial neural network, cloud integration, and an intuitive mobile interface to provide a seamless, user-friendly, and reliable experience.
 
 ## Mobile Features Developed
 
@@ -10,8 +10,8 @@ FixU is a mobile application designed to help users detect and manage their ment
 - **Depression Detection System**
   - Users can select their status as "Professional" or "Student."
   - Custom questions are presented based on the chosen status.
-  - Responses are collected through various input formats (radio buttons, text fields, etc).
-  - Data is processed using a deep learning model that is deployed in the cloud.
+  - Responses are collected through various input formats.
+  - Data is processed using a artificial neural network models that is deployed in the cloud.
   - Personalized diagnostic results are generated based on the user’s inputs.
 
 - **Dairy Notes with Reminders**
@@ -21,7 +21,7 @@ FixU is a mobile application designed to help users detect and manage their ment
   - Custom reminder times can be set based on user preferences.
 
 - **Dark Mode Support**
-  - Toggle between light and dark themes using a Material Switch.
+  - Toggle between light and dark themes.
   - User preferences are saved, and the theme is applied automatically when the app restarts.
 
 - **Bottom Navigation Bar**
@@ -30,10 +30,10 @@ FixU is a mobile application designed to help users detect and manage their ment
 ## Technical Specifications
 
 - **Languages and Frameworks**: Kotlin, Android Studio, Retrofit, Room Database.
-- **UI Libraries**: Material Design, Glide (image loading).
+- **UI Libraries**: Material Design, Glide.
 - **Theme Management**: Material3 with custom Base.Theme.fixu.
-- **Data Storage**: Room Database (local) and Cloud API for question-answer processing.
-- **Deep Learning**: Depression detection using a custom-trained on-cloud DL model.
+- **Data Storage**: Room Database and Cloud API for question-answer processing.
+- **Artificial Neural Network**: Depression detection using a custom-trained on-cloud models.
 - **Cloud Integration**: APIs deployed in the cloud for backend processing.
 
 ## Project Structure
@@ -89,30 +89,5 @@ FixU is a mobile application designed to help users detect and manage their ment
    ```
 
 6. **Sync Gradle** if you made changes to your Gradle files.
-
-## How It Works
-
-### Depression Detection Flow
-1. The user selects their status (Professional or Student).
-2. A series of 10 tailored questions are presented based on the selected status.
-3. The answers are compiled into an array and sent to the cloud.
-4. The deep learning model processes the data and returns a diagnosis.
-5. The app displays the diagnostic results with actionable insights.
-
-### Diary Notes Flow
-- Users can add notes by tapping the floating action button.
-- Upon confirmation, the data is sent to the backend API and saved in the cloud database.
-- The application retrieves and displays the list of notes stored in the cloud.
-
-### Dark Mode
-- User preferences for dark mode are stored in **SharedPreferences**.
-- The theme can be toggled in the **Profile** section, and the setting is applied automatically at app restart.
-
-## Future Enhancements
-
-- **Consultation Feature**: Provide recommendations based on diagnosis results to mental health professionals.
-- **Health Tips**: Offer actionable mental health suggestions based on diagnostic results.
-- **Community Integration**: Facilitate connections between users and mental health professionals.
-- **Multi-Language Support**: Expand the app to support additional languages for broader accessibility.
 
 ---
